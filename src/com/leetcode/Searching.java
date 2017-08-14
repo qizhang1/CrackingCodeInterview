@@ -41,6 +41,24 @@ public class Searching {
         }
         return result;
     }
+    
+    // Given a sorted array, find out how many number is <= target (may not exist)
+    public static int binarySearchRight(int[] nums, int target) {
+    	int left = 0;
+    	int right = nums.length - 1;
+    	int result = -1;
+    	while (left <= right) {
+    		int mid = (left + right) / 2;
+    		if (nums[mid] <= target && (mid == nums.length - 1 || nums[mid + 1] > target)) {
+    			return mid;
+    		} else if (nums[mid] <= target) {
+    			left = mid + 1;
+    		} else {
+    			right = mid - 1;
+    		}
+    	}
+    	return result;
+    }
 	
     // *****************************************************************************************
     // Search for a Range 
@@ -308,8 +326,8 @@ public class Searching {
     
     // *****************************************************************************************    
     // A peak element is an element that is greater than its neighbors.
-    // Given an input array where num[i] ¡Ù num[i+1], find a peak element and return its index.
-    // Assume that num[-1] = num[n] = -¡Ş.
+    // Given an input array where num[i] ï¿½ï¿½ num[i+1], find a peak element and return its index.
+    // Assume that num[-1] = num[n] = -ï¿½ï¿½.
     // Time O(logn) Space O(1)
     public static int findPeakElement(int[] num) {
         int left = 0;
@@ -335,7 +353,7 @@ public class Searching {
     // Time O(logn) Space O(1)
     public static int[] searchRange(int[] A, int target) {
         int[] result = new int[]{-1, -1};
-        // Ïò×ó¼Ğ±Æ  find most left target A[left1]
+        // ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½  find most left target A[left1]
         int left1 = 0;
         int right1 = A.length - 1;
         while (left1 <= right1) {
@@ -347,7 +365,7 @@ public class Searching {
         	} 
         }
         
-        // ÏòÓÒ¼Ğ±Æ find right most target A[right2]
+        // ï¿½ï¿½ï¿½Ò¼Ğ±ï¿½ find right most target A[right2]
         int left2 = 0;
         int right2 = A.length - 1;
         while (left2 <= right2) {

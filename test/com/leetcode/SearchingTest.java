@@ -138,5 +138,22 @@ public class SearchingTest {
 		assertEquals(2, Searching.searchMatrix2(matrix, 3));
 	}
 	
+	@Test
+	public void testBinarySearchLeft2() {
+		int[] arr = {5, 7, 7, 8, 8, 10};
+		assertEquals(2, Searching.binarySearchRight(arr, 7));
+		assertEquals(-1, Searching.binarySearchRight(arr, 4));
+		assertEquals(4, Searching.binarySearchRight(arr, 9));
+		assertEquals(5, Searching.binarySearchRight(arr, 11));
+		assertEquals(4, Searching.binarySearchRight(arr, 8));
+	}
+	
+	@Test
+	public void testBinarySearchLeft2_testEmpty() {
+		int[] arr = {};
+		assertEquals(-1, Searching.binarySearchRight(arr, 4));
+	}
+	
+	
 
 }

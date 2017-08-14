@@ -530,13 +530,15 @@ public class MyLinkedList {
 		return false;
 	}
 
+	// Add the two numbers and return it as a linked list.
+	// Ex. (2 -> 4 -> 3) + (5 -> 6 -> 4) = 7 -> 0 -> 8  342 + 465 = 807
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		ListNode dummyHead = new ListNode(0);
 		ListNode cur = dummyHead;
 		int carryover = 0;
 		while (l1 != null || l2 != null) {
-			int n1 = l1 == null ? 0 : l1.val;
-			int n2 = l2 == null ? 0 : l2.val;
+			int n1 = (l1 != null) ? l1.val : 0;
+			int n2 = (l2 != null) ? l2.val : 0;
 			int sum = n1 + n2 + carryover;
 			cur.next = new ListNode(sum % 10);
 			carryover = sum / 10;

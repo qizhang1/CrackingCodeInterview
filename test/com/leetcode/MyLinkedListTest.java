@@ -220,10 +220,24 @@ public class MyLinkedListTest extends TestCase {
 		assertTrue(MyLinkedList.isLinkedListEqual(head1, MyLinkedList.reverseBetween(head1, 1, 1)));
 	}
 	
-	public void testAddTwoNumbers(){
+	public void testAddTwoNumbers1(){
 		ListNode head1 = MyLinkedList.createLinkedListFromArray1(new int[]{2, 4, 3});
 		ListNode head2 = MyLinkedList.createLinkedListFromArray1(new int[]{5, 6, 4});
 		ListNode result = MyLinkedList.createLinkedListFromArray1(new int[]{7, 0, 8});
+		assertTrue(MyLinkedList.isLinkedListEqual(result, MyLinkedList.addTwoNumbers(head1, head2)));
+	}
+	
+	public void testAddTwoNumbers2(){
+		ListNode head1 = MyLinkedList.createLinkedListFromArray1(new int[]{0, 1});
+		ListNode head2 = MyLinkedList.createLinkedListFromArray1(new int[]{0, 1, 2});
+		ListNode result = MyLinkedList.createLinkedListFromArray1(new int[]{0, 2, 2});
+		assertTrue(MyLinkedList.isLinkedListEqual(result, MyLinkedList.addTwoNumbers(head1, head2)));
+	}
+	
+	public void testAddTwoNumbers3(){
+		ListNode head1 = MyLinkedList.createLinkedListFromArray1(new int[]{1});
+		ListNode head2 = MyLinkedList.createLinkedListFromArray1(new int[]{9, 9});
+		ListNode result = MyLinkedList.createLinkedListFromArray1(new int[]{0, 0, 1});
 		assertTrue(MyLinkedList.isLinkedListEqual(result, MyLinkedList.addTwoNumbers(head1, head2)));
 	}
 	
