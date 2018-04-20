@@ -3,19 +3,19 @@ package com.leetcode;
 public class Algorithm_Greedy {
 	
 	// Best Time to Buy and Sell Stock I
-	// only permitted to complete at most one transaction at the same day
+	// only permitted to complete at most one transaction (buy or sale) at the same day
     public static int maxProfit1(int[] prices) {
-        if (prices.length == 0) {
-        	return 0;
-        }
-        int minPrice = prices[0];
+
+        int minPrice = Integer.MAX_VALUE;
         int maxProfit = 0;
         for (int i = 1; i < prices.length; i++) {
             // track the lowest stock price
-            if (prices[i] < minPrice) {
+            if (prices[i] <= minPrice) {
                 minPrice = prices[i];
-            } else if (prices[i] - minPrice > maxProfit) {
-            	// current best deal
+                continue;
+            }
+            // current best profit
+            if (prices[i] - minPrice > maxProfit) {
                 maxProfit = prices[i] - minPrice; 
             }
         }

@@ -7,10 +7,17 @@ import org.junit.Test;
 public class Algorithm_GreedyTest {
 
 	@Test
-	public void testMaxProfit() {
+	public void testMaxProfit1() {
 		int[] arr = new int[] { 2, 4, 3, 6, 7 };
 		int result = Algorithm_Greedy.maxProfit2(arr);
 		assertEquals(6, result);
+	}
+	
+	@Test
+	public void testMaxProfit2() {
+		int[] arr = new int[] {7, 6, 4, 3, 1};
+		int result = Algorithm_Greedy.maxProfit2(arr);
+		assertEquals(0, result);
 	}
 	
 	@Test
