@@ -20,6 +20,11 @@ public class MyNumberTest extends TestCase {
 		assertEquals(101, MyNumber.reverse(x));
 	}
 	
+	public void testReverse4(){
+		int x = 1534236469; // test integer overflow
+		assertEquals(0, MyNumber.reverse(x));
+	}
+	
 	public void testAtoi1(){
 		String s = "  -1";
 		assertEquals(-1, MyNumber.atoi(s));

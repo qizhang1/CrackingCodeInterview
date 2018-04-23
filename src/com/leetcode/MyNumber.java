@@ -6,10 +6,14 @@ import java.util.HashSet;
 public class MyNumber {
 	public static int reverse(int x) {
 		int sign = x > 0 ? 1 : -1;
-		int abs_x = x > 0 ? x : -x;
+		int abs_x = Math.abs(x);
 		int result = 0;
 		while (abs_x > 0) {
 			int digit = abs_x % 10;
+			//  integer overflow 2,147,483,647
+			if (result > Integer.MAX_VALUE / 10 || result * 10 > Integer.MAX_VALUE - digit) {
+				return 0;
+			}
 			result = result * 10 + digit;
 			abs_x = abs_x / 10;
 		}
@@ -183,7 +187,7 @@ public class MyNumber {
 	
 
 	// Given a roman numeral, convert it to an integer [1, 3999]
-	// ´ÓÇ°Ïòºó±éÀúÂŞÂíÊı×Ö£¬Èç¹ûÄ³¸öÊı±ÈÇ°Ò»¸öÊıĞ¡£¬Ôò¼ÓÉÏ¸ÃÊı¡£·´Ö®£¬¼õÈ¥Ç°Ò»¸öÊıµÄÁ½±¶È»ºó¼ÓÉÏ¸ÃÊı
+	// ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Ò»ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½È¥Ç°Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½
 	// IV, IX, XL, XC, CD, CM
 	public static int romanToInt(String s) {
 		HashMap<Character, Integer> map = new HashMap<>();
