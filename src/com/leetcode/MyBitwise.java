@@ -3,13 +3,12 @@ package com.leetcode;
 public class MyBitwise {
 	// Counts the number of bits that is 1
 	// x is an unsigned integer (a.k.a the Hamming weight).
-	// Brian Kernighan��s Algorithm
+	// Brian Kernighan's Algorithm - flip the least-significant 11-bit of the number n to 0,
 	public static int bitCount(int x) {
 		int count = 0;
 		while (x != 0) {
 			// Subtraction of 1 from a number toggles all the bits (from right
-			// to left)
-			// till the rightmost set bit(including the rightmost set bit)
+			// to left) till the rightmost set bit(including the rightmost set bit)
 			x = x & (x - 1);
 			count++;
 		}
@@ -26,8 +25,20 @@ public class MyBitwise {
 		}
 		return count;
 	}
+	// Time O(1) Space O(1)
+    public int hammingWeight2(int n) {
+	    int bits = 0;
+	    int mask = 1;
+	    for (int i = 0; i < 32; i++) {
+	        if ((n & mask) != 0) {
+	            bits++;
+	        }
+	        mask <<= 1;
+	    }
+	    return bits;
+    }
 
-	public int hammingWeight2(int n) {
+	public int hammingWeight3(int n) {
 		return Integer.bitCount(n);
 	}
 
