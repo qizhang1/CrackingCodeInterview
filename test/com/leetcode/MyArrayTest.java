@@ -11,25 +11,25 @@ public class MyArrayTest extends TestCase {
 	public void testTwoSum1() {
 		int[] arr = new int[] { 3, 2, 4 };
 		int index[] = MyArray.twoSum1(arr, 6);
-		assertTrue(Arrays.equals(new int[] { 2, 3 }, index));
+		assertTrue(Arrays.equals(new int[] { 1, 2 }, index));
 	}
 
 	public void testTwoSum2() {
 		int[] arr = new int[] { 2, 0, 2, 11, 15 };
 		int index[] = MyArray.twoSum1(arr, 4);
-		assertTrue(Arrays.equals(new int[] { 1, 3 }, index));
+		assertTrue(Arrays.equals(new int[] { 0, 2 }, index));
 	}
 
 	public void testTwoSum3() {
 		int[] arr = new int[] { 2, 3, 4 };
 		int index[] = MyArray.twoSum2(arr, 7);
-		assertTrue(Arrays.equals(new int[] { 2, 3 }, index));
+		assertTrue(Arrays.equals(new int[] { 1, 2 }, index));
 	}
 
 	public void testTwoSum4() {
 		int[] arr = new int[] { 2, 7, 11, 15 };
 		int index[] = MyArray.twoSum2(arr, 22);
-		assertTrue(Arrays.equals(new int[] { 2, 4 }, index));
+		assertTrue(Arrays.equals(new int[] { 1, 3 }, index));
 	}
 
 	public void testThreeSum1() {
@@ -251,7 +251,14 @@ public class MyArrayTest extends TestCase {
 		assertEquals(4, MyArray.longestConsecutive(num));
 	}
 	
-
+    public void testFindDisappearedNumbers() {
+    	int[] num = new int[] {4,3,2,7,8,2,3,1};
+    	int[] result = new int[] {5,6};
+    	List<Integer> result2 = MyArray.findDisappearedNumbers(num);
+    	System.out.println(result2);
+    	assertEquals(result, MyArray.findDisappearedNumbers(num));
+    }
+    
 	
 
 	

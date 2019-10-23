@@ -14,8 +14,8 @@ public class MyArray {
 		for (int i = 0; i < numbers.length; i++) {
 			int remainder = target - numbers[i]; // use remainder as search key
 			if (map.containsKey(remainder)) {
-				result[0] = map.get(remainder) + 1;
-				result[1] = i + 1;
+				result[0] = map.get(remainder);
+				result[1] = i;
 				break;
 			} else {
 				map.put(numbers[i], i); // <number, index>
@@ -58,7 +58,7 @@ public class MyArray {
 	// *****************************************************************************************
 	// 3Sum
 	// Find all unique triplets (a,b,c)in the array which gives a + b + c = 0.
-	// Elements in a triplet (a,b,c) must be in non-descending order. (a ¡Ü b ¡Ü c)
+	// Elements in a triplet (a,b,c) must be in non-descending order.
 	// Time O(n2) Space O(1)
 	public static List<List<Integer>> threeSum(int[] num) {
 		Arrays.sort(num);
@@ -156,7 +156,7 @@ public class MyArray {
 	
 	// *****************************************************************************************
 	// Find all unique quadruplets in the array which gives the sum of target
-	// Elements in a quadruplet (a,b,c,d) must be in non-descending order. (ie, a ¡Ü b ¡Ü c ¡Ü d)
+	// Elements in a quadruplet (a,b,c,d) must be in non-descending order.
 	// Time O(n3) Space O(n)
     public static List<List<Integer>> fourSum1(int[] num, int target) {
 		Arrays.sort(num);
@@ -675,6 +675,48 @@ public class MyArray {
         return max;
     }
     
+    // Given an array of integers where 1 â‰¤ a[i] â‰¤ n (n = size of array), some elements appear twice and others appear once.
+    // Find all the elements of [1, n] inclusive that do not appear in this array.
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+        Arrays.sort(nums);
+        List<Integer> result = new ArrayList<>();
+        int i = 0;
+        for (int j = 1; j <= nums.length; ) {
+                 if ( i < nums.length && nums[i] == j) {
+                     i++;
+                     continue;
+                 }
+                 if (i < nums.length && nums[i] == j + 1) {
+                     i++;
+                     continue;
+                 } else { 
+                     result.add (j);
+                     j++;
+                 }
+        }
+        return result;
+    }
 
+    // Given a binary matrix A, flip the image horizontally, then invert it, and return the resulting image.
+    // Time O(n), Space O(1)
+    public int[][] flipAndInvertImage(int[][] A) {
+        int len = A[0].length;
+        // reverse each row [1,1,0] - > [0,1,1]
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < len / 2; j++) {
+                int tmp = A[i][j];
+                A[i][j] = A[i][len-j];
+                A[i][len-j] = tmp;
+            }
+        }
+
+        //invert 0->1, 1->0
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[0].length; j++) {
+                A[i][j] = 1-A[i][j] ;
+            }
+        }
+        return A;
+    }
     
 }
