@@ -251,12 +251,18 @@ public class MyArrayTest extends TestCase {
 		assertEquals(4, MyArray.longestConsecutive(num));
 	}
 	
-    public void testFindDisappearedNumbers() {
+    public void testFindDisappearedNumbers1() {
     	int[] num = new int[] {4,3,2,7,8,2,3,1};
-    	int[] result = new int[] {5,6};
-    	List<Integer> result2 = MyArray.findDisappearedNumbers(num);
-    	System.out.println(result2);
-    	assertEquals(result, MyArray.findDisappearedNumbers(num));
+        List<Integer> result = MyArray.findDisappearedNumbers(num);
+        System.out.println(result);
+        assertEquals(Arrays.asList(5, 6), MyArray.findDisappearedNumbers(num));
+    }
+
+    public void testFindDisappearedNumbers2() {
+        int[] num = new int[] {2,2};
+        List<Integer> result = MyArray.findDisappearedNumbers(num);
+        System.out.println(result);
+        assertEquals(Arrays.asList(1), MyArray.findDisappearedNumbers(num));
     }
     
 	

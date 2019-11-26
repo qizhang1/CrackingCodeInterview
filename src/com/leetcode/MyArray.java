@@ -677,22 +677,21 @@ public class MyArray {
     
     // Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
     // Find all the elements of [1, n] inclusive that do not appear in this array.
+    // Time O(nlogn), Space O(1)
     public static List<Integer> findDisappearedNumbers(int[] nums) {
         Arrays.sort(nums);
         List<Integer> result = new ArrayList<>();
         int i = 0;
         for (int j = 1; j <= nums.length; ) {
-                 if ( i < nums.length && nums[i] == j) {
-                     i++;
-                     continue;
-                 }
-                 if (i < nums.length && nums[i] == j + 1) {
-                     i++;
-                     continue;
-                 } else { 
-                     result.add (j);
-                     j++;
-                 }
+            if (i == nums.length || j < nums[i]) {
+                result.add(j);
+                j++;
+            } else if (j == nums[i]) {
+                j++;
+                i++;
+            } else {
+              i++;
+            }
         }
         return result;
     }
