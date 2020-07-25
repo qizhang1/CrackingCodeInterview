@@ -8,6 +8,26 @@ import junit.framework.TestCase;
 
 public class MyArrayTest extends TestCase {
 
+	public void testArrayClone() {
+        int intArray[] = {1,2,3};
+        int cloneArray[] = intArray.clone();
+
+        // 1d array: deep copy is created for one-dimensional array
+        assertFalse(intArray == cloneArray);
+
+        for (int i = 0; i < cloneArray.length; i++) {
+            System.out.print(cloneArray[i]+" ");
+        }
+
+        int int2DArray[][] = {{1,2,3},{4,5}};
+        int clone2DArray[][] = int2DArray.clone();
+        assertFalse(int2DArray == clone2DArray);
+
+        // 2d array: shallow copy is created, sub-arrays are shared
+        assertTrue(int2DArray[0] == clone2DArray[0]);
+        assertTrue(int2DArray[1] == clone2DArray[1]);
+	}
+
 	public void testTwoSum1() {
 		int[] arr = new int[] { 3, 2, 4 };
 		int index[] = MyArray.twoSum1(arr, 6);
@@ -253,16 +273,30 @@ public class MyArrayTest extends TestCase {
 	
     public void testFindDisappearedNumbers1() {
     	int[] num = new int[] {4,3,2,7,8,2,3,1};
-        List<Integer> result = MyArray.findDisappearedNumbers(num);
+        List<Integer> result = MyArray.findDisappearedNumbers1(num);
         System.out.println(result);
-        assertEquals(Arrays.asList(5, 6), MyArray.findDisappearedNumbers(num));
+        assertEquals(Arrays.asList(5, 6), result);
     }
 
     public void testFindDisappearedNumbers2() {
         int[] num = new int[] {2,2};
-        List<Integer> result = MyArray.findDisappearedNumbers(num);
+        List<Integer> result = MyArray.findDisappearedNumbers1(num);
         System.out.println(result);
-        assertEquals(Arrays.asList(1), MyArray.findDisappearedNumbers(num));
+        assertEquals(Arrays.asList(1), result);
+    }
+    
+    public void testFindDisappearedNumbers3() {
+    	int[] num = new int[] {4,3,2,7,8,2,3,1};
+        List<Integer> result = MyArray.findDisappearedNumbers2(num);
+        System.out.println(result);
+        assertEquals(Arrays.asList(5, 6), result);
+    }
+
+    public void testFindDisappearedNumbers4() {
+        int[] num = new int[] {2,2};
+        List<Integer> result = MyArray.findDisappearedNumbers2(num);
+        System.out.println(result);
+        assertEquals(Arrays.asList(1), result);
     }
     
 	

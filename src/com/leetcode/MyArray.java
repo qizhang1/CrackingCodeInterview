@@ -1,7 +1,14 @@
 package com.leetcode;
 
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class MyArray {
 
@@ -54,7 +61,7 @@ public class MyArray {
 		}
 		return result;
 	}
-	
+
 	// *****************************************************************************************
 	// 3Sum
 	// Find all unique triplets (a,b,c)in the array which gives a + b + c = 0.
@@ -63,7 +70,7 @@ public class MyArray {
 	public static List<List<Integer>> threeSum(int[] num) {
 		Arrays.sort(num);
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		
+
 		for (int a = 0; a < num.length - 2 && num[a] <= 0; a = getNextRightDiffNum(num, a))
 		{
 			int b = a + 1;
@@ -81,18 +88,22 @@ public class MyArray {
 					b = getNextRightDiffNum(num, b);
 				}
 		    }
-		    
+
 		}
 		return new ArrayList<List<Integer>>(result);
     }
 
     private static int getNextRightDiffNum(int[] num, int i) {
-		while (i + 1 < num.length && num[i + 1] == num[i]) i++;
+		while (i + 1 < num.length && num[i + 1] == num[i]) {
+			i++;
+		}
 		return ++i;
     }
-    
+
     private  static int getNextLeftDiffNum(int[] num, int i) {
-		while (i - 1 >= 0 && num[i - 1] == num[i]) i--;
+		while (i - 1 >= 0 && num[i - 1] == num[i]) {
+			i--;
+		}
 		return --i;
     }
 
@@ -121,10 +132,10 @@ public class MyArray {
 		}
 		return new ArrayList<List<Integer>>(result);
 	}
-	
+
 	// *****************************************************************************************
-	// Given an array S of n integers, find three integers in S such that the sum is closest to a given target. 
-	// Return the sum of the three integers. 
+	// Given an array S of n integers, find three integers in S such that the sum is closest to a given target.
+	// Return the sum of the three integers.
 	// Assume that each input would have exactly one solution.
 	// Time O(n2) Space O(1)
 	public static int threeSumClosest(int[] num, int target) {
@@ -148,12 +159,12 @@ public class MyArray {
         		} else {
         		    c--;
         		}
-        	}        	
+        	}
         }
 		return result;
     }
-	
-	
+
+
 	// *****************************************************************************************
 	// Find all unique quadruplets in the array which gives the sum of target
 	// Elements in a quadruplet (a,b,c,d) must be in non-descending order.
@@ -183,7 +194,7 @@ public class MyArray {
 		}
 		return new ArrayList<List<Integer>>(result);
     }
-	
+
 	// Given an sorted positive integer array
 	// find maxium occurrence
 	public static int findMaxOccurance(int[] arr) {
@@ -480,8 +491,8 @@ public class MyArray {
 		}
 		return Arrays.asList(row);
 	}
-	
-	// Given an array of size n, find the majority element. 
+
+	// Given an array of size n, find the majority element.
 	// The majority element is the element that appears more than |_ n/2 _| times.
 	// Assume that the array is non-empty and the majority element always exist in the array.
 	// Time O(n), Space O(n)
@@ -495,7 +506,7 @@ public class MyArray {
             }
             if (hm.get(num[i]) > num.length / 2) {
                 return num[i];
-            } 
+            }
         }
         return -1; // not found
     }
@@ -527,7 +538,7 @@ public class MyArray {
 		}
 		return min;
 	}
-	
+
 	// Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
 	// Time O(n^2) Space O(1)
     public static List<Integer> spiralOrder(int[][] matrix) {
@@ -539,7 +550,7 @@ public class MyArray {
         int endRow = matrix.length - 1;
         int startCol = 0;
         int endCol = matrix[0].length - 1;
-        
+
         for (; startRow <= endRow && startCol <= endCol; startRow++, endRow--, startCol++, endCol--) {
         	for (int i = startCol; i <= endCol; i++) {
         		result.add(matrix[startRow][i]);
@@ -557,34 +568,36 @@ public class MyArray {
         }
         return result;
     }
-    
-    // Spiral Matrix II 
+
+    // Spiral Matrix II
     // Given an integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
     // Time O(n^2) Space O(n^2)
     public static int[][] generateMatrix(int n) {
         int[][] matrix = new int[n][n];
-        if (n == 0) return matrix;
-        
+        if (n == 0) {
+			return matrix;
+		}
+
         int start = 0;
         int end = matrix.length - 1;
-        
+
         // for (int num = 1; start <= end
         for (int num = 1; num <= n * n; start++, end--){
         	for (int i = start; i <= end; i++) {
         		matrix[start][i] = num;
         		num++;
         	}
-        	
+
         	for (int j = start + 1; j < end; j++) {
         		matrix[j][end] = num;
         		num++;
         	}
-        	
+
         	for (int k = end; k>= start && start< end; k--) {
         		matrix[end][k] = num;
         		num++;
         	}
-        	
+
         	for (int h = end - 1; h > start && start < end; h--) {
         		matrix[h][start] = num;
         		num++;
@@ -592,7 +605,7 @@ public class MyArray {
         }
         return matrix;
     }
-    
+
     // *****************************************************************************************
     // Rotate an array of n elements to the right by k steps.
     // Time O(n) Space O(1)
@@ -603,7 +616,7 @@ public class MyArray {
         reverseArr(nums, 0, k - 1); // reverse first k
         reverseArr(nums, k, n - 1); // reverse later n - k
     }
-    
+
     private static void reverseArr(int[] nums, int start, int end) {
         while (start < end) {
         	// swap
@@ -614,10 +627,10 @@ public class MyArray {
             end--;
         }
     }
-    
+
     // *****************************************************************************************
     // Given a list of non negative integers, arrange them such that they form the largest number.
-    public static String largestNumber(int[] num) {	
+    public static String largestNumber(int[] num) {
 //    	if (num.length == 0) {
 //    		return "";
 //    	}
@@ -630,8 +643,10 @@ public class MyArray {
     	Arrays.sort(numCopy, comparator);
 
     	// special case [0, 0, ...]
-    	if (numCopy[0].equals("0")) return "0";
-    	
+    	if (numCopy[0].equals("0")) {
+			return "0";
+		}
+
     	// concatenate biggest number
     	StringBuilder result = new StringBuilder();
     	for (int i = 0; i < num.length; i++) {
@@ -642,11 +657,11 @@ public class MyArray {
     // return 1 if n1 + n2 is greater than n2 + n1
     static class IntegerComparator implements Comparator<String> {
 		@Override
-		public int compare(String n1, String n2) {	
-			return (n1 + n2).compareTo(n2 + n1); 
+		public int compare(String n1, String n2) {
+			return (n1 + n2).compareTo(n2 + n1);
 		}
     }
-    
+
     // Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
     // Time O(n) -- each num is add once and remove once
     public static int longestConsecutive(int[] num) {
@@ -674,15 +689,15 @@ public class MyArray {
         }
         return max;
     }
-    
+
     // Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
     // Find all the elements of [1, n] inclusive that do not appear in this array.
-    // Time O(nlogn), Space O(1)
-    public static List<Integer> findDisappearedNumbers(int[] nums) {
+    // Sorting - Time O(nlogn), Space O(1)
+    public static List<Integer> findDisappearedNumbers1(int[] nums) {
         Arrays.sort(nums);
         List<Integer> result = new ArrayList<>();
-        int i = 0;
-        for (int j = 1; j <= nums.length; ) {
+        // 1 ≤ j ≤ nums[i]
+        for (int i = 0, j = 1; j <= nums.length; ) {
             if (i == nums.length || j < nums[i]) {
                 result.add(j);
                 j++;
@@ -693,6 +708,36 @@ public class MyArray {
               i++;
             }
         }
+        return result;
+    }
+
+    // Sorting [0...n] - Time O(nlogn), Space O(1)
+    public static List<Integer> findDisappearedNumbers2(int[] nums) {
+        Arrays.sort(nums);
+        int len = nums.length;
+        int[] numsToSearch = new int[len + 2];
+        numsToSearch[0] = 0;
+        numsToSearch[numsToSearch.length - 1] = len;
+        for (int i = 1; i <= nums.length; i++) {
+        	numsToSearch[i] = nums[i-1];
+        }
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0, j = 1; j < numsToSearch.length; i++, j++ ) {
+            if (numsToSearch[j] == numsToSearch[i] + 1) {
+				continue;
+			}
+            for (int num = numsToSearch[i] + 1; num < numsToSearch[j]; num++) {
+            	result.add(num);
+            }
+        }
+        return result;
+    }
+
+    // Boolean Array - Time O(n), Space O(n)
+    public static List<Integer> findDisappearedNumbers3(int[] nums) {
+
+        List<Integer> result = new ArrayList<>();
+
         return result;
     }
 
@@ -717,5 +762,26 @@ public class MyArray {
         }
         return A;
     }
-    
+
+    // Given a string, find the first non-repeating character in it and return it's index.
+    // If it doesn't exist, return -1.
+    // Time O(n), Space O(N)
+    public int firstUniqChar(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+    	for (int i = 0; i < s.length(); i++) {
+    		Character c = s.charAt(i);
+    		if (map.containsKey(c)) {
+    			map.put(c, map.get(c)+1);
+    		} else {
+    			map.put(c, 1);
+    		}
+    	}
+    	for (int i = 0; i < s.length(); i++) {
+    		Character c = s.charAt(i);
+    		if (map.get(c) == 1) {
+    			return i;
+    		}
+    	}
+        return -1;
+    }
 }
