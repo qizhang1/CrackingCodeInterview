@@ -7,7 +7,8 @@ import java.util.*;
 import junit.framework.TestCase;
 
 public class MyArrayTest extends TestCase {
-
+	
+	
 	public void testArrayClone() {
         int intArray[] = {1,2,3};
         int cloneArray[] = intArray.clone();
@@ -26,6 +27,12 @@ public class MyArrayTest extends TestCase {
         // 2d array: shallow copy is created, sub-arrays are shared
         assertTrue(int2DArray[0] == clone2DArray[0]);
         assertTrue(int2DArray[1] == clone2DArray[1]);
+	}
+	
+	public void testMoveZeros1() {
+		int[] nums = {0, 1, 0, 3, 12};
+		int[] expect = {1, 3, 12, 0, 0};
+		assertTrue(Arrays.equals(MyArray.moveZeroes1(nums), expect));
 	}
 
 	public void testTwoSum1() {

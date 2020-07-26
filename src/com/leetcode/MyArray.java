@@ -11,6 +11,27 @@ import java.util.List;
 import java.util.Set;
 
 public class MyArray {
+	
+	// LC-283. Move Zeroes - Given an array nums, move all 0's to the end 
+	// while maintaining the relative order of the non-zero elements.
+	// Time O(n) Space O(1)
+	// ** Two pointer **
+    public static int[] moveZeroes1(int[] nums) {
+        int dest = 0;
+        for (int src = 0; src < nums.length; src++) {
+            if ( nums[src] != 0) {
+                nums[dest] = nums[src];
+                dest++;
+            } 
+        }
+        // fill in the rest with 0's.
+        Arrays.fill(nums, dest, nums.length, 0);
+        // while (dest < nums.length) {
+        //     nums[dest]=0;
+        //     dest++;
+        // }
+        return nums;
+    }
 
 	// Given an array of integers,
 	// find two numbers such that they add up to a specific target number
