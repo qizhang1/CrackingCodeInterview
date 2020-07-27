@@ -12,5 +12,4 @@ public class My2DArrayTest extends TestCase {
 		int[][] expect = {{1, 2, 3, 4}};
 		assertTrue(Arrays.deepEquals(reshapedNums, expect));
 	}
-
 }

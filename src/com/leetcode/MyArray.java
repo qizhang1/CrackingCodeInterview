@@ -217,7 +217,7 @@ public class MyArray {
     }
 
 	// Given an sorted positive integer array
-	// find maxium occurrence
+	// find maxim occurrence
 	public static int findMaxOccurance(int[] arr) {
 		int max = 0;
 		int count = 0; // count for each element
@@ -233,6 +233,24 @@ public class MyArray {
 		}
 		return max;
 	}
+	
+	
+	// LC-485. Max Consecutive Ones
+	// Given a binary array, find the maximum number of consecutive 1's
+	// Time O(n) Space O(1)
+    public static int findMaxConsecutiveOnes(int[] nums) {
+        int max = 0;
+        int cur = 0;
+        for ( int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                cur++;
+                max = Math.max(max, cur);
+            } else {
+                cur = 0; // reset
+            } 
+        }
+        return max;
+    }
 
 	// Given a sorted array, remove the duplicates in place
 	// return the new length.

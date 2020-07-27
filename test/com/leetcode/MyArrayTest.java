@@ -102,6 +102,16 @@ public class MyArrayTest extends TestCase {
 		int max = MyArray.findMaxOccurance(arr);
 		assertEquals(max, 3);
 	}
+	
+	public void testFindMaxConsecutiveOnes1() {
+		int[] arr = {1,1,0,1,1,1};
+		assertEquals(MyArray.findMaxConsecutiveOnes(arr), 3);
+	}
+	
+	public void testFindMaxConsecutiveOnes2() {
+		int[] arr = {1};
+		assertEquals(MyArray.findMaxConsecutiveOnes(arr), 1);
+	}
 
 	public void testRemoveDuplicates2_1() {
 		int[] arr = new int[] { 1, 1 };
