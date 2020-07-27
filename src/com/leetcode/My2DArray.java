@@ -30,5 +30,31 @@ public class My2DArray {
         }
         return reshapedNums;
 	}
+	
+	// LC-240. Search a 2D Matrix II
+	//Searches for a value in an m x n matrix.
+    // Integers in each row and column are sorted in ascending from left to right.
+	// Time O(m+n) Space O(1)
+    public static boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return false;
+        }
+        
+        // start with top, right corner number
+        int r = 0;
+        int c = matrix[0].length - 1;
+        
+        while (r < matrix.length && c >= 0) {
+            int num = matrix[r][c];
+            if (num == target) {
+                return true;
+            } else if (num > target) {
+                c--;
+            } else {
+                r++;
+            }
+        }
+        return false;
+    }
 
 }
