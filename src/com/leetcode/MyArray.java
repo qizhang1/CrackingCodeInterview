@@ -239,17 +239,17 @@ public class MyArray {
 	// Given a binary array, find the maximum number of consecutive 1's
 	// Time O(n) Space O(1)
     public static int findMaxConsecutiveOnes(int[] nums) {
-        int max = 0;
+        int curMax = 0;
         int cur = 0;
-        for ( int i = 0; i < nums.length; i++) {
-            if (nums[i] == 1) {
+        for (int n: nums) {
+            if (n == 1) {
                 cur++;
-                max = Math.max(max, cur);
+                curMax = Math.max(curMax, cur);
             } else {
-                cur = 0; // reset
-            } 
+                cur = 0;
+            }    
         }
-        return max;
+        return curMax;
     }
 
 	// Given a sorted array, remove the duplicates in place
