@@ -823,4 +823,44 @@ public class MyArray {
     	}
         return -1;
     }
+    
+    // LC-645. Set Mismatch
+    // Given an array nums [1...n], one number got duplicated to another number
+    // find the number occurs twice and the missing number.
+    // Space O(n), Time O(n)
+    public static int[] findErrorNums1(int[] nums) {
+        int[] result = new int[2];
+        int[] count = new int[nums.length]; // array used as hashmap
+        for (int n: nums) {
+            count[n - 1] += 1;
+        }
+        for (int i = 0; i < count.length; i++) {
+            if (count[i] == 0) { // missing number
+                result[1] = i + 1; 
+            } else if (count[i] == 2) { // duplicated number
+                result[0] = i + 1;
+            }
+        }
+        return result;
+    }
+    
+    public static int[] findErrorNums2(int[] nums) {
+        int[] result = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            int n = Math.abs(nums[i]);
+            if (nums[n - 1] < 0) {
+                // dup
+                result[0] = n;
+            } else {
+            	// Inversion, mark nums[n-1] as negative number
+                nums[n-1] = -nums[n-1]; 
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                result[1] = i+1;
+            }
+        }
+        return result;
+    }
 }

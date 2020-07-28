@@ -316,6 +316,20 @@ public class MyArrayTest extends TestCase {
         assertEquals(Arrays.asList(1), result);
     }
     
+    public void testFindErrorNums1() {
+    	int[] nums = {1, 2, 2, 4};
+    	int[] expect = {2, 3};
+    	int[] result = MyArray.findErrorNums1(nums);
+    	assertTrue(Arrays.equals(result, expect));
+    }
+    
+    public void testFindErrorNums2() {
+    	int[] nums = {1, 2, 2, 4};
+    	int[] expect = {2, 3};
+    	int[] result = MyArray.findErrorNums2(nums);
+    	assertTrue(Arrays.equals(result, expect));
+    }
+    
 	
 
 	
