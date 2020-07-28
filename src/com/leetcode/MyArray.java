@@ -844,6 +844,7 @@ public class MyArray {
         return result;
     }
     
+    // Space O(1), Time O(n)
     public static int[] findErrorNums2(int[] nums) {
         int[] result = new int[2];
         for (int i = 0; i < nums.length; i++) {
