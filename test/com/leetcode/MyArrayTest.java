@@ -330,7 +330,20 @@ public class MyArrayTest extends TestCase {
     	assertTrue(Arrays.equals(result, expect));
     }
     
-	
+    public void testFindShortestSubArray1() {
+    	int[] nums = {1,1};
+    	assertEquals(2, MyArray.findShortestSubArray(nums));
+    }
+    
+    public void testFindShortestSubArray2() {
+    	int[] nums = {1,3,2,2,3,1};
+    	assertEquals(2,MyArray.findShortestSubArray(nums));
+    }
+    
+    public void testFindShortestSubArray3() {
+    	int[] nums = {1,2,2,3,1,4,2};
+    	assertEquals(6,MyArray.findShortestSubArray(nums));
+    }
 
 	
 }

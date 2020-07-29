@@ -864,4 +864,33 @@ public class MyArray {
         }
         return result;
     }
+    
+    // LC-697. Degree of an Array
+    // Find the smallest possible length of a subarray that has the same degree as nums.
+    // The degree is defined as the maximum frequency of any one element.
+    // Space O(n), Time O(n)
+    public static int findShortestSubArray(int[] nums) {
+        HashMap<Integer, Integer> count = new HashMap<>();
+        HashMap<Integer, Integer> firstIndex = new HashMap<>();
+        HashMap<Integer, Integer> lastIndex = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int n = nums[i];
+            if (count.containsKey(n)) {
+                count.put(n, count.get(n) + 1);
+            } else {
+                count.put(n, 1);
+                firstIndex.put(n, i);
+            }
+            lastIndex.put(n, i);
+        }
+        
+        int degree = Collections.max(count.values());
+        int shortestSubArrayLen = nums.length;
+        for (int n : nums) {
+            if (count.get(n) == degree) {
+                shortestSubArrayLen = Math.min(shortestSubArrayLen, lastIndex.get(n) - firstIndex.get(n) + 1);
+            }
+        }
+        return shortestSubArrayLen;
+    }
 }
