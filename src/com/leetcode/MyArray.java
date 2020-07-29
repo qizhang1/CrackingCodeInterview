@@ -893,4 +893,26 @@ public class MyArray {
         }
         return shortestSubArrayLen;
     }
+    
+    // LC-667. Beautiful Arrangement II
+    // Given two integers n and k (1 <= k < n), construct an array with number [1,n] and
+    // [|a1 - a2|, |a2 - a3|, ... , |an-1 - an|] has exactly k distinct integers.
+    // Time O(n), Space O(n)
+    public static int[] constructArray(int n, int k) {
+        int[] arr = new int[n];
+        // padding in natural order 1...n-k-1
+        for (int i = 0; i < n - k - 1; i++) {
+            arr[i] = i + 1;
+        }
+        // **Algorithm: remaining {[n-k, n-k+1, ...,n--, n]}
+        boolean isSmall = true;
+        int small = n - k;
+        int large = n;
+        for (int i = n - k - 1; i < n; i++) {
+            arr[i] = isSmall ? small++ : large--;
+            isSmall = !isSmall;
+        }
+        return arr;
+    }
+    
 }

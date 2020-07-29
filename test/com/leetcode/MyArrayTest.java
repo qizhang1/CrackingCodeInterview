@@ -344,6 +344,11 @@ public class MyArrayTest extends TestCase {
     	int[] nums = {1,2,2,3,1,4,2};
     	assertEquals(6,MyArray.findShortestSubArray(nums));
     }
+    
+    public void testConstructArray() {
+    	int[] result = {1, 2, 3, 10, 4, 9, 5, 8, 6, 7};
+    	assertTrue(Arrays.equals(MyArray.constructArray(10, 7), result));
+    }
 
 	
 }
