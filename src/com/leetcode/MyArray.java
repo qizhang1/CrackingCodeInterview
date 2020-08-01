@@ -915,4 +915,19 @@ public class MyArray {
         return arr;
     }
     
+    // LC-769. Max Chunks To Make Sorted
+    // Split the array into "chunks" (partitions), and individually sort each,
+    // the concatenated result equals the sorted array
+    // Time O(n), Space O(1)
+    public static int maxChunksToSorted(int[] arr) {
+        int count = 0;
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            max = Math.max(max, arr[i]);
+            if (max == i) {
+                count++;
+            }
+        }
+        return count;
+    }
 }

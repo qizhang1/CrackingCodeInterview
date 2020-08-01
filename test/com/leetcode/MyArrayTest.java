@@ -349,6 +349,11 @@ public class MyArrayTest extends TestCase {
     	int[] result = {1, 2, 3, 10, 4, 9, 5, 8, 6, 7};
     	assertTrue(Arrays.equals(MyArray.constructArray(10, 7), result));
     }
+    
+    public void testMaxChunksToSorted() {
+    	int[] arr = {1, 0, 2, 3, 4};
+    	assertEquals(4, MyArray.maxChunksToSorted(arr));
+    }
 
 	
 }
