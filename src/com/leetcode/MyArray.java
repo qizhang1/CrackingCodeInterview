@@ -930,4 +930,54 @@ public class MyArray {
         }
         return count;
     }
+    
+    // LC-565. Array Nesting
+    // A zero-indexed array A of length N contains all integers from 0 to N-1. 
+    // Find and return the longest length of set S, where S[i] = {A[i], A[A[i]], A[A[A[i]]], ... }, 
+    // stop adding before a duplicate element occurs
+    // Brute Force Speed O(n^2), Space O(1)
+    public static int arrayNesting1(int[] nums) {
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int start = i, count = 0;
+            do {
+                start = nums[start];
+                count++;
+            } while (start != i);
+            res = Math.max(res, count);
+        }
+        return res;
+    }
+    
+    // Space O(n), Space O(1) *visited array*
+    public static int arrayNesting2(int[] nums) {
+    	boolean[] isVisited = new boolean[nums.length];
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+        	if (!isVisited[i]) {
+                int start = i, count = 0;
+                do {
+                    start = nums[start];
+                    count++;
+                    isVisited[start] = true;
+                } while (start != i);
+                res = Math.max(res, count);
+            }
+        }
+        return res;
+    }
+    
+    // LC-581. Shortest Unsorted Continuous Subarray
+    // Find one continuous subarray that if you only sort this subarray in ascending order, 
+    // then the whole array will be sorted.
+    // Time O(nlogn), Space O(n)
+    public static int findUnsortedSubarray(int[] nums) {
+        int[] sortedNums = nums.clone();
+        Arrays.sort(sortedNums);
+        
+        int left, right;
+        for (left = 0; left < nums.length && nums[left] == sortedNums[left]; left++);       
+        for (right = nums.length - 1; right >= 0 && nums[right] == sortedNums[right]; right--);
+        return right - left + 1 < 0 ? 0 : right - left + 1;
+    }
 }

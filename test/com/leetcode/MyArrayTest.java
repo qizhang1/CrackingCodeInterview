@@ -13,7 +13,7 @@ public class MyArrayTest extends TestCase {
         int intArray[] = {1,2,3};
         int cloneArray[] = intArray.clone();
 
-        // 1d array: deep copy is created for one-dimensional array
+        // 1d array: deep copy is created for one-dimensional primitive type array.
         assertFalse(intArray == cloneArray);
 
         for (int i = 0; i < cloneArray.length; i++) {
@@ -353,6 +353,26 @@ public class MyArrayTest extends TestCase {
     public void testMaxChunksToSorted() {
     	int[] arr = {1, 0, 2, 3, 4};
     	assertEquals(4, MyArray.maxChunksToSorted(arr));
+    }
+    
+    public void testArrayNesting1() {
+    	int[] arr = {5,4,0,3,1,6,2};
+    	assertEquals(4, MyArray.arrayNesting1(arr));
+    }
+    
+    public void testArrayNesting2() {
+    	int[] arr = {5,4,0,3,1,6,2};
+    	assertEquals(4, MyArray.arrayNesting2(arr));
+    }
+    
+    public void testFindUnsortedSubarray1() {
+    	int[] arr = {1, 2, 3, 4};
+    	assertEquals(0, MyArray.findUnsortedSubarray(arr));
+    }
+    
+    public void testFindUnsortedSubarray2() {
+    	int[] arr = {2, 6, 4, 8, 10, 9, 15};
+    	assertEquals(5, MyArray.findUnsortedSubarray(arr));
     }
 
 	
