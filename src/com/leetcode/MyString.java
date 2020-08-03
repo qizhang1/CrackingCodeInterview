@@ -122,8 +122,8 @@ public class MyString {
 	}
 
 	// *****************************************************************************************
-	// Anagram, Á½¸ö´ÊËùÓÃµÄ×ÖÄ¸¼°Æä¸öÊý¶¼ÊÇÒ»ÑùµÄ£¬µ«ÊÇ×ÖÄ¸µÄÎ»ÖÃ²»Ò»Ñù¡£
-	// ÀûÓÃhashtable+¼ÆÊýÆ÷µÄÔ­Àí O(a+b)
+	// Anagram, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½Î»ï¿½Ã²ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
+	// ï¿½ï¿½ï¿½ï¿½hashtable+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ O(a+b)
 	public static boolean isAnagrams1(String a, String b) {
 		int[] letters = new int[256]; // ANSI
 		for (char c : a.toCharArray()) {
@@ -284,7 +284,7 @@ public class MyString {
 		return reverse.toString();
 	}
 
-	//¼ò»¯ s.trim() trailing space
+	//ï¿½ï¿½ s.trim() trailing space
 	public static String reverseWords2(String s) {
 		StringBuilder reverse = new StringBuilder();
 		for (int i = s.length() - 1; i >= 0; i--) {
@@ -525,5 +525,17 @@ public class MyString {
 
 		return false;
 	}
+	
+	// LC-796. Rotate String
+	// Return True if and only if A can become B after some number of shifts on A
+	// Time O(n), Space O(n)
+    public static boolean rotateString(String A, String B) {
+        return B.length() == A.length() && (A + A).contains(B);
+    }
+    
+    
+	
+	
+	
 
 }

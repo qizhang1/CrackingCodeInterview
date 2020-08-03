@@ -260,4 +260,8 @@ public class MyStringTest extends TestCase {
     	assertTrue(MyString.isMatch("aab", "c*a*b"));
     }
     
+    public void testRotateString() {
+    	assertTrue(MyString.rotateString("aabcd", "cdaab"));
+    	assertFalse(MyString.rotateString("aa", "a"));
+    }
 }
