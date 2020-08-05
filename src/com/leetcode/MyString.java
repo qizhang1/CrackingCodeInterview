@@ -122,8 +122,34 @@ public class MyString {
 	}
 
 	// *****************************************************************************************
-	// Anagram, ���������õ���ĸ�����������һ���ģ�������ĸ��λ�ò�һ����
-	// ����hashtable+��������ԭ�� O(a+b)
+	// LC-242. Valid Anagram
+	// assume the string contains only lowercase alphabets
+	// Time O(n), Space O(a+b)
+	public static boolean isAnagrams(String s, String t) {
+		
+	    if (s.length() != t.length()) {
+	        return false;
+	    }
+        char[] str1 = s.toCharArray();
+        char[] str2 = t.toCharArray();
+	    Map<Character, Integer> count = new HashMap<>();
+
+        for (int i = 0; i < str1.length; i++) {
+            char c = str1[i];
+            count.put(c, count.getOrDefault(c, 0)+1);
+        }
+        for (int i = 0; i < str2.length; i++) {
+            char c = str2[i];
+            if (count.containsKey(c) && count.get(c) != 0) {
+                count.put(c, count.get(c)-1);
+            } else {
+                return false;
+            }
+        }
+        return true;
+	}
+
+	// use int[256] to mimic Hashmap, optional
 	public static boolean isAnagrams1(String a, String b) {
 		int[] letters = new int[256]; // ANSI
 		for (char c : a.toCharArray()) {
@@ -143,10 +169,18 @@ public class MyString {
 		return true;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	// Time O(nlogn), Space O(1) suboptimal
 	public static boolean isAnagrams2(String a, String b) {
 		char[] arr_a = a.toCharArray();
-		Arrays.sort(arr_a);
 		char[] arr_b = b.toCharArray();
+		Arrays.sort(arr_a);
 		Arrays.sort(arr_b);
 		return Arrays.equals(arr_a, arr_b);
 	}
@@ -261,8 +295,9 @@ public class MyString {
 	}
 
 	// *****************************************************************************************
+	// LC-151. Reverse Words in a String
 	// Time: O(n) space: O(n)
-	public static String reverseWords(String s) {
+	public static String reverseWords1(String s) {
 		StringBuilder reverse = new StringBuilder();
 		for (int i = s.length() - 1; i >= 0; i--) {
 			// skip trailing spaces if any
@@ -284,7 +319,7 @@ public class MyString {
 		return reverse.toString();
 	}
 
-	//�� s.trim() trailing space
+	// s.trim() trailing space
 	public static String reverseWords2(String s) {
 		StringBuilder reverse = new StringBuilder();
 		for (int i = s.length() - 1; i >= 0; i--) {
@@ -299,6 +334,20 @@ public class MyString {
 			reverse.append(s.substring(start, end + 1)).append(" ");
 		}
 		return reverse.toString().trim();
+	}
+	
+	// Time: O(n) space: O(n)
+	public static String reverseWords3(String s) {
+		// trim() to remove leading (and trailing) whitespace before the split
+		String[] splitedStr = s.trim().split(" +"); 
+		StringBuilder reverse = new StringBuilder();
+		for (int i = splitedStr.length - 1; i >=0; i--) {
+			reverse.append(splitedStr[i]);
+			if(i != 0) {
+				reverse.append(" ");
+			}
+		}
+		return reverse.toString();
 	}
 
 	// *****************************************************************************************
@@ -533,6 +582,24 @@ public class MyString {
         return B.length() == A.length() && (A + A).contains(B);
     }
     
+    // Shift string K places
+    // Time O(n), Space O(n) - String is immutable, char[] takes space"
+    public static String shift(String s, int k) {
+    	char[] ch = s.toCharArray(); 
+    	reverse(ch, 0, s.length() - k - 1);
+    	reverse(ch, s.length() - k, s.length() - 1);
+    	reverse(ch, 0, s.length()-1);
+    	return String.valueOf(ch);
+    }
+    
+    static void reverse(char[] ch, int start, int end) { 
+        for (int i = start, j = end; i < j; i++, j--) {
+	    	char temp = ch[i]; 
+	        ch[i] = ch[j]; 
+	        ch[j] = temp; 
+        }
+    } 
+  
     
 	
 	

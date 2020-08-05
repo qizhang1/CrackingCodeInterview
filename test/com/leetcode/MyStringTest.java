@@ -143,18 +143,21 @@ public class MyStringTest extends TestCase {
 	}
 	
     public void testReverseWords1(){
-    	String s = "the sky is blue";
-    	assertEquals("blue is sky the", MyString.reverseWords(s));
+    	assertEquals("blue is sky the", MyString.reverseWords1("the sky is blue"));
+    	assertEquals("world! hello", MyString.reverseWords1("  hello world!  "));
+    	assertEquals("", MyString.reverseWords1(""));
     }
     
     public void testReverseWords2(){
-    	String s = "";
-    	assertEquals("", MyString.reverseWords(s));
+    	assertEquals("blue is sky the", MyString.reverseWords2("the sky is blue"));
+    	assertEquals("world! hello", MyString.reverseWords2("  hello world!  "));
+    	assertEquals("", MyString.reverseWords2(""));
     }
     
     public void testReverseWords3(){
-    	String s = "   1  ";
-    	assertEquals("1", MyString.reverseWords2(s));
+    	assertEquals("blue is sky the", MyString.reverseWords3("the sky is blue"));
+    	assertEquals("world! hello", MyString.reverseWords3("  hello world!  "));
+    	assertEquals("", MyString.reverseWords3(""));
     }
     
     public void testIsPalindrome1() {
@@ -263,5 +266,11 @@ public class MyStringTest extends TestCase {
     public void testRotateString() {
     	assertTrue(MyString.rotateString("aabcd", "cdaab"));
     	assertFalse(MyString.rotateString("aa", "a"));
+    }
+    
+    public void testShift() {
+    	String s = "abcd123";
+    	String result = MyString.shift(s, 3);
+    	assertTrue(result.equals("123abcd"));
     }
 }

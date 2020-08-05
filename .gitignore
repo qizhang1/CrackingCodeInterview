@@ -1,1 +1,37 @@
+# Created by .gitignore support plugin (hsz.mobi)
+### Java template
+*.class
+*.classpath
+*.project
+*.iml
+*.ipr
+*.iws
+*.cache-main
+*.cache-tests
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.ear
+*.zip
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+*.log
+
+#Directories
+.gradle/
+.idea/
+.settings/
+.svn/
+target/
+test-output/
+deploy/
+out/
+build/
 /bin/
+
+#OS X Files
+.DS_Store
