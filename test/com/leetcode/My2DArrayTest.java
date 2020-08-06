@@ -1,11 +1,16 @@
 package com.leetcode;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.Arrays;
+
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
-public class My2DArrayTest extends TestCase {
+public class My2DArrayTest {
 	
+	@Test
 	public void testMatrixReshape() {
 		int[][] nums = {{1, 2}, {3, 4}};
 		int[][] reshapedNums = My2DArray.matrixReshape(nums, 1, 4);

@@ -124,27 +124,25 @@ public class MyString {
 	// *****************************************************************************************
 	// LC-242. Valid Anagram
 	// assume the string contains only lowercase alphabets
-	// Time O(n), Space O(a+b)
+	// Time O(n), Space O(a+b) 
+	// General optimal solution
 	public static boolean isAnagrams(String s, String t) {
-		
-	    if (s.length() != t.length()) {
-	        return false;
-	    }
-        char[] str1 = s.toCharArray();
-        char[] str2 = t.toCharArray();
-	    Map<Character, Integer> count = new HashMap<>();
-
-        for (int i = 0; i < str1.length; i++) {
-            char c = str1[i];
+        if (s.length() != t.length()) {
+            return false;
+        }
+        HashMap<Character, Integer> count = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
             count.put(c, count.getOrDefault(c, 0)+1);
         }
-        for (int i = 0; i < str2.length; i++) {
-            char c = str2[i];
+        
+        for (int i = 0; i < t.length(); i++) {
+            char c = t.charAt(i);
             if (count.containsKey(c) && count.get(c) != 0) {
                 count.put(c, count.get(c)-1);
             } else {
                 return false;
-            }
+            } 
         }
         return true;
 	}
@@ -169,13 +167,6 @@ public class MyString {
 		return true;
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	// Time O(nlogn), Space O(1) suboptimal
 	public static boolean isAnagrams2(String a, String b) {
 		char[] arr_a = a.toCharArray();
@@ -369,9 +360,30 @@ public class MyString {
 		return true;
 	}
 
+	// LC- 409. Longest Palindrome
+	// Time O(n), Space O(n) 
+    public static int longestPalindromeLen(String s) {
+        Map<Character, Integer> count = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            count.put(c, count.getOrDefault(c, 0) + 1);
+        }
+        
+        int lenEven = 0;
+        boolean hasOdd = false;
+        for (int n : count.values())  {
+            if ( n % 2 == 0) {
+               lenEven += n;
+            } else {
+               lenEven += n - 1;
+               hasOdd = true;
+            }
+        }
+        return hasOdd ? lenEven + 1 : lenEven;
+    }
+	
 	// find the longest palindromic substring in S
 	// assume that the maximum length of S is 1000, and there exists one unique
-	// longest palindromic
 	public static String longestPalindrome(String s) {
 
 		return null;
