@@ -108,7 +108,7 @@ public class MyString {
                 if (c2 != map.get(c1)) {
                     return false;
                 }
-            } else if (map.containsValue(c2)) { // No two characters may map to the same character 
+            } else if (map.containsValue(c2)) { // Warning: O(n)!! No two characters may map to the same character 
                 return false;
             } else {
                 map.put(c1, c2);
@@ -401,7 +401,32 @@ public class MyString {
 
 		return null;
 	}
-
+	
+	
+	// LC-647. Palindromic Substrings
+	// Count how many palindromic substrings in this string.
+	// The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.
+	// Time O(n2), Space O(1) *Expand around center*
+	public static int countSubstrings(String s) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            count += expandPalindrome(s, i, i);//odd length
+            count += expandPalindrome(s, i, i + 1);//even length
+        }
+        return count;
+    }
+	
+    public static int expandPalindrome(String s, int left, int right){
+        int count = 0; 
+        while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+            count++;
+        }
+        return count;
+    }
+	
+    // *****************************************************************************************
 	// The string "PAYPALISHIRING" is written in a zigzag pattern on a given
 	// number of rows
 	// And then read line by line: "PAHNAPLSIIGYIR"
