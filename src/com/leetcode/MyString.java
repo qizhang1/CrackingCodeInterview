@@ -95,31 +95,44 @@ public class MyString {
 	}
 
 	// *****************************************************************************************
+	// LC-205. Isomorphic Strings
 	// Two words are called isomorphic if the letters in one word can be
-	// remapped to get the second word. Remapping a letter means replacing all
-	// occurrences of it with another letter while the ordering of the letters
-	// remains unchanged.
-	// 1 : 1 mapping
-	public static boolean isIsomorphic(String src, String tgt) {
-		HashMap<Character, Character> src_tgt = new HashMap<>();
-		HashMap<Character, Character> tgt_src = new HashMap<>();
-
-		int i = 0;
-		for (; i < src.length() && i < tgt.length(); i++) {
-			char c1 = src.charAt(i);
-			char c2 = tgt.charAt(i);
-			if (src_tgt.containsKey(c1) && src_tgt.get(c1).charValue() != c2) {
-				return false;
-			} else if (tgt_src.containsKey(c2)
-					&& tgt_src.get(c2).charValue() != c1) {
-				return false;
-			} else {
-				src_tgt.put(c1, c2);
-				tgt_src.put(c2, c1);
-			}
-		}
-		return i == src.length() && i == tgt.length();
+	// remapped to get the second word. 
+	// Time O(n^2), Space O(n) 
+	public static boolean isIsomorphic(String s, String t) {
+        HashMap<Character, Character> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c1 = s.charAt(i);
+            char c2 = t.charAt(i);
+            if (map.containsKey(c1)) {
+                if (c2 != map.get(c1)) {
+                    return false;
+                }
+            } else if (map.containsValue(c2)) { // No two characters may map to the same character 
+                return false;
+            } else {
+                map.put(c1, c2);
+            }
+        }
+        return true;
 	}
+	
+	// Time O(n), Space O(n), Optimal
+    public boolean isIsomorphic2(String s, String t) {
+        HashMap<Character, Character> sMap = new HashMap<>(), tMap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++){
+            char c1 = s.charAt(i);
+            char c2 = t.charAt(i);
+            if ((sMap.containsKey(c1) && sMap.get(c1) != c2) 
+                || (tMap.containsKey(c2) && tMap.get(c2) != c1)){
+                return false;
+            } else {
+                sMap.put(c1, c2);
+                tMap.put(c2, c1);
+            }
+        }
+        return true;
+    }
 
 	// *****************************************************************************************
 	// LC-242. Valid Anagram
@@ -363,23 +376,23 @@ public class MyString {
 	// LC- 409. Longest Palindrome
 	// Time O(n), Space O(n) 
     public static int longestPalindromeLen(String s) {
-        Map<Character, Integer> count = new HashMap<>();
+        HashMap<Character, Integer> count = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             count.put(c, count.getOrDefault(c, 0) + 1);
         }
         
-        int lenEven = 0;
+        int len = 0;
         boolean hasOdd = false;
         for (int n : count.values())  {
             if ( n % 2 == 0) {
-               lenEven += n;
+               len += n;
             } else {
-               lenEven += n - 1;
+               len += n - 1;
                hasOdd = true;
             }
         }
-        return hasOdd ? lenEven + 1 : lenEven;
+        return hasOdd ? len + 1 : len;
     }
 	
 	// find the longest palindromic substring in S
