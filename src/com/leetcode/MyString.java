@@ -410,8 +410,8 @@ public class MyString {
 	public static int countSubstrings(String s) {
         int count = 0;
         for (int i = 0; i < s.length(); i++) {
-            count += expandPalindrome(s, i, i);//odd length
-            count += expandPalindrome(s, i, i + 1);//even length
+            count += expandPalindrome(s, i, i); //odd length
+            count += expandPalindrome(s, i, i + 1); //even length
         }
         return count;
     }
@@ -422,6 +422,27 @@ public class MyString {
             left--;
             right++;
             count++;
+        }
+        return count;
+    }
+    
+    // Time O(n2), Space O(1)
+    public static int countSubstrings2(String s) {
+        int count = 0;
+        for ( int i = 0; i < s.length(); i++) {
+            int j = 0;
+            while (i + j < s.length() && i - j >= 0 && s.charAt(i+j) == s.charAt(i-j)) {   
+               count++;
+               j++;
+            }
+        }
+        
+        for (int i = 0; i < s.length(); i++) {
+            int j = 0;
+            while ( i - j >= 0 && i + 1 + j < s.length() &&  s.charAt(i-j) == s.charAt(i+1+j)) {
+               count++;
+               j++;
+            }
         }
         return count;
     }
