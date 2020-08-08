@@ -55,6 +55,8 @@ public class MyNumber {
 		return isnegative ? -result : result;
 	}
 
+	// LC-9. Palindrome Number
+	// Time O(n), Space O(n) suboptimal
 	public static boolean isPalindrome1(int x) {
 		if (x < 0) {
 			return false;
@@ -68,6 +70,7 @@ public class MyNumber {
 		return true;
 	}
 
+	// Time O(n), Space O(1)
 	public static boolean isPalindrome2(int x) {
 		if (x < 0) {
 			return false;
