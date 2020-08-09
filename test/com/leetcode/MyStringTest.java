@@ -334,4 +334,9 @@ public class MyStringTest {
     	String result = MyString.shift(s, 3);
     	assertTrue(result.equals("123abcd"));
     }
+	
+	@Test
+	public void testsCountBinarySubstrings() {
+		assertEquals(6, MyString.countBinarySubstrings("00110011"));
+	}
 }
