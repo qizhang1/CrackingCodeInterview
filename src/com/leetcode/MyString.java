@@ -672,7 +672,7 @@ public class MyString {
     } 
     
     // LC-696. Count Binary Substrings
-    // Time O(n), Space O(1) *linear scan*
+    // Time O(n), Space O(1) *linear scan sliding window*
     public static int countBinarySubstrings(String s) {
         int preLen = 0, curLen = 1, count = 0;
         for (int i = 1; i < s.length(); i++) {
@@ -680,7 +680,7 @@ public class MyString {
                 curLen++;
             } else {
                 preLen = curLen;
-                curLen = 1;
+                curLen = 1; // reset
             }
 
             if (preLen >= curLen) {
@@ -688,6 +688,19 @@ public class MyString {
             }
         }
         return count;
+    }
+    
+    
+    // LC-1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence
+    // Time O(n), Space O(n)
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        String[] split = sentence.split(" ");
+        for (int i = 0; i < split.length; i++) {
+            if (split[i].startsWith(searchWord)) {
+                return i + 1;
+            }
+        }  
+        return -1;
     }
   
     
