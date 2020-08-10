@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.*;
 
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
 public class MyArrayTest extends TestCase {
@@ -375,5 +377,12 @@ public class MyArrayTest extends TestCase {
     	assertEquals(5, MyArray.findUnsortedSubarray(arr));
     }
 
+    
+	@Test
+	public void testMaxKSumSubarray() {
+		assertEquals(700, MyArray.maxKSumSubarray(new int[] {100, 200, 300, 400}, 2));
+		assertEquals(6, MyArray.maxKSumSubarray(new int[] {5, 2, -1, 0, 3}, 3));
+
+	}
 	
 }

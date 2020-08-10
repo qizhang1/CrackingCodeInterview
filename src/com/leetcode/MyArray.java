@@ -322,20 +322,40 @@ public class MyArray {
         }
 	}
 
-	// Find the sub array that yields the largest SUM;
+	// LC-53. Maximum Subarray Find the sub array that yields the largest SUM;
 	// {} return Integer.MIN_VALUE
-	// Time O(n), Space O(1)
+	// Time O(n), Space O(1) *sliding window*
 	public static int maxSubArray1(int[] A) {
 		int max = Integer.MIN_VALUE;
 		int cur = 0;
 		for (int i = 0; i < A.length; i++) {
 			cur = Math.max(cur + A[i], A[i]);
-			if (cur > max) {
-				max = cur;
-			}
+			max = Math.max(max, cur);
 		}
 		return max;
 	}
+	
+	
+    // Calculate the maximum sum of k consecutive elements in the array. K <= arr.length
+    // Time O(n), Space O(1) *sliding window*
+    public static int maxKSumSubarray(int[] arr, int k) {
+    	// find first k window sum
+    	int cur = 0;
+    	for (int i = 0; i < k; i++) {
+    		cur += arr[i];
+    	}
+    	
+    	int max = cur;
+    	for (int i = k; i < arr.length; i++) { 
+    		cur = cur + arr[i] - arr[i - k];
+    		max = Math.max(max, cur);
+    	}
+    	return max;
+    }
+    
+    
+    
+    
 
 	// Find the largest subsequence of the given array that yields the largest
 	// PRODUCT
@@ -980,4 +1000,6 @@ public class MyArray {
         for (right = nums.length - 1; right >= 0 && nums[right] == sortedNums[right]; right--);
         return right - left + 1 < 0 ? 0 : right - left + 1;
     }
+    
+
 }
