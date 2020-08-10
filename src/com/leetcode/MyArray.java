@@ -353,6 +353,31 @@ public class MyArray {
     	return max;
     }
     
+    // LC-1456. Maximum Number of Vowels in a Substring of Given Length
+    // Return the maximum number of vowel letters in any substring of s with length k.
+    // Assume s consists of lowercase letters, 1 <= k <= s.length
+    // Time O(n), Space O(1) *sliding window*
+    public static int maxVowels(String s, int k) {
+        var vowels = Set.of('a', 'e', 'i', 'o', 'u');
+        int cur = 0;
+        for (int i = 0; i < k;  i++) {
+            if (vowels.contains(s.charAt(i))) {
+                cur++;
+            }
+        }
+        int max = cur;
+        for (int i = k; i < s.length(); i++) {
+            if (vowels.contains(s.charAt(i))) {
+                cur++;
+            }
+            if (vowels.contains(s.charAt(i - k))) {
+                cur--;
+            }
+            max = Math.max(max, cur);
+        }
+        return max;
+    }
+    
     
     
     

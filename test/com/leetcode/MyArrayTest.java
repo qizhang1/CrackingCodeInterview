@@ -385,4 +385,9 @@ public class MyArrayTest extends TestCase {
 
 	}
 	
+	@Test
+	public void testMaxVowels() {
+		assertEquals(3, MyArray.maxVowels("abciiidef", 3));
+		assertEquals(2, MyArray.maxVowels("leetcode", 3));
+	}
 }
