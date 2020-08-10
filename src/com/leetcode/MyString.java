@@ -584,8 +584,9 @@ public class MyString {
 		return 0;
 	}
 
-	// Given a string, find the length of the longest Non-Repeating Character
-	// Substring (NRCS)
+	// LC-3. Longest Substring Without Repeating Characters
+	// Time O(n), Space O(n) optimized
+	// https://www.geeksforgeeks.org/window-sliding-technique/
 	public static int lengthOfLongestSubstring(String s) {
 		// hashmap store the last indexes of already visited characters
 		HashMap<Character, Integer> indexMap = new HashMap<>();
@@ -594,20 +595,35 @@ public class MyString {
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
 			// update start
-			if (indexMap.containsKey(c) && indexMap.get(c) >= start) { // repeating
-																		// exists
+			if (indexMap.containsKey(c) && indexMap.get(c) >= start) { // repeating exists
 				start = indexMap.get(c) + 1;
 			}
 			// update the index of current character
 			indexMap.put(c, i);
-			// update max length
-			int curlen = i - start + 1;
-			if (curlen > maxLen) {
-				maxLen = curlen;
-			}
+			maxLen = Math.max(maxLen,i - start + 1);
 		}
 		return maxLen;
 	}
+	
+	// Time O(n), Space O(n) suboptimal
+    public static int lengthOfLongestSubstring2(String s) {
+        int left = 0;
+        int len = 0;
+        HashSet<Character> set = new HashSet<>();
+        for (int right = 0; right < s.length(); right++) {
+            if (set.contains(s.charAt(right))) {
+                while (s.charAt(left) != s.charAt(right)) {
+                    set.remove(s.charAt(left));
+                    left++;
+                }
+                left++;
+            } else {
+                set.add(s.charAt(right));
+                len = Math.max(len, right - left + 1);
+            }
+        }
+        return len;
+    }
 
 	// Implement wildcard matching with support for '?' and '*'
 	// '?' Matches any single character
