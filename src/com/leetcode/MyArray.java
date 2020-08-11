@@ -1022,5 +1022,29 @@ public class MyArray {
         return right - left + 1 < 0 ? 0 : right - left + 1;
     }
     
+    // LC-217. Contains Duplicate
+    // Time O(n), Space O(n)
+    public static boolean containsDuplicate1(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int n : nums) {
+            if (set.contains(n)) {
+                return true;
+            } 
+            set.add (n);
+        }
+        return false;
+    }
+    
+   // Time O(nlogn), Space O(1) 
+    public static boolean containsDuplicate2(int[] nums) {
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 1; ++i) {
+            if (nums[i] == nums[i + 1]) {
+            	return true;
+            }
+        }
+        return false;
+    }
+    
 
 }
