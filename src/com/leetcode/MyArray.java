@@ -33,11 +33,12 @@ public class MyArray {
         return nums;
     }
 
-	// Given an array of integers,
+	// LC-1. Two Sum 
 	// find two numbers such that they add up to a specific target number
 	// Assume that each input would have exactly one solution? -- non repetitive number
+    // Time O(n), Space O(n) * HashMap * 
 	public static int[] twoSum1(int[] numbers, int target) {
-		HashMap<Integer, Integer> map = new HashMap<>();
+		HashMap<Integer, Integer> map = new HashMap<>(); // <number, index>
 		int[] result = new int[2];
 		for (int i = 0; i < numbers.length; i++) {
 			int remainder = target - numbers[i]; // use remainder as search key
@@ -46,20 +47,18 @@ public class MyArray {
 				result[1] = i;
 				break;
 			} else {
-				map.put(numbers[i], i); // <number, index>
+				map.put(numbers[i], i);
 			}
 		}
 		return result;
 	}
 
+	// Time O(nlogn), Space O(n) *Sorting with two pointers, suboptimal*
 	public static int[] twoSum2(int[] numbers, int target) {
-		// preprocessing, store <value, index> pair in an arrayList
-		ArrayList<Integer> index_value_list = new ArrayList<Integer>(
-				numbers.length);
+		ArrayList<Integer> sortedNumbers = new ArrayList<>();
 		for (int i = 0; i < numbers.length; i++) {
-			index_value_list.add(i, numbers[i]);
+			sortedNumbers.add(i, numbers[i]);
 		}
-		// sort O(log N)
 		Arrays.sort(numbers);
 
 		int[] result = new int[2];
@@ -68,11 +67,8 @@ public class MyArray {
 		while (start < end) {
 			int remainder = target - numbers[start];
 			if (remainder == numbers[end]) {
-				// found
-				int index1 = index_value_list.indexOf(numbers[start]);
-				int index2 = index_value_list.lastIndexOf(numbers[end]);
-				result[0] = Math.min(index1, index2) + 1;
-				result[1] = Math.max(index1, index2) + 1;
+				result[0] = start;
+				result[1] = end;
 				break;
 			} else if (remainder < numbers[end]) {
 				end--;
