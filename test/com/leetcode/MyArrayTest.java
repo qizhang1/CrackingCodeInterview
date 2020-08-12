@@ -390,4 +390,9 @@ public class MyArrayTest extends TestCase {
 		assertEquals(3, MyArray.maxVowels("abciiidef", 3));
 		assertEquals(2, MyArray.maxVowels("leetcode", 3));
 	}
+	
+	@Test
+	public void testFindLHS() {
+		assertEquals(5, MyArray.findLHS(new int[] {1,3,2,2,5,2,3,7}));
+	}
 }

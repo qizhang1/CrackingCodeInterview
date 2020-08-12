@@ -1046,5 +1046,22 @@ public class MyArray {
         return false;
     }
     
+    // LC-594. Longest Harmonious Subsequence
+    // Time O(n), Space O(n) * HashMap *
+    public static int findLHS(int[] nums) {
+        HashMap<Integer, Integer> count = new HashMap<>();
+        for (int n : nums) {
+            count.put(n, count.getOrDefault(n, 0) + 1); // < number, count>
+        } 
+       
+        int max = 0;
+        for (int n : nums) {
+            if (count.containsKey(n+1)) {
+                max = Math.max(max, count.get(n) + count.get(n+1));
+            }
+        }
+        return max;
+    }
+    
 
 }
