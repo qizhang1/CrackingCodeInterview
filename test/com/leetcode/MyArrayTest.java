@@ -286,8 +286,9 @@ public class MyArrayTest extends TestCase {
 	}
 	
 	public void testLongestConsecutive1() {
-		int[] num = new int[] {100, 4, 200, 1, 3, 2};
-		assertEquals(4, MyArray.longestConsecutive(num));
+		assertEquals(4, MyArray.longestConsecutive(new int[] {100, 4, 200, 1, 3, 2}));
+		assertEquals(3, MyArray.longestConsecutive(new int[] {0, 1, 1, 2}));
+		assertEquals(0, MyArray.longestConsecutive(new int[] {}));
 	}
 	
     public void testFindDisappearedNumbers1() {

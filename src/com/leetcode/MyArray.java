@@ -742,32 +742,47 @@ public class MyArray {
 		}
     }
 
-    // Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
-    // Time O(n) -- each num is add once and remove once
-    public static int longestConsecutive(int[] num) {
-        HashSet<Integer> hs = new HashSet<>();
-        for (int n : num) {
-        	hs.add(n);
+    // LC-128. Longest Consecutive Sequence (hard)
+    // Given an unsorted array of integers, find the length of the longest consecutive sequence. 
+    // Time O(n), Space O(n) * HashSet and Intelligent Sequence Building *
+    public static int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int n : nums) {
+            set.add(n);
         }
+
         int max = 0;
-        for (int n : num){
-        	hs.remove(n);
-        	int count = 1;
-        	int low = n - 1;
-        	while (hs.contains(low)){
-        		hs.remove(low);
-        		count++;
-        		low--;
-        	}
-        	int high = n + 1;
-        	while (hs.contains(high)){
-        		hs.remove(high);
-        		count++;
-        		high++;
-        	}
-        	max = Math.max(max, count);
+        for (int n: nums) {
+        	// only attempt to build sequences from numbers that are not already part of a longer sequence!!
+            if (!set.contains(n - 1)) {
+                int cur = 1;
+                while (set.contains(n + 1)) {
+                    n++;
+                    cur++;
+                }
+                max = Math.max(max, cur);
+            }
         }
         return max;
+    }
+    
+    // Time O(nlogn), Space O(1) suboptimal
+    public static int longestConsecutive2(int[] nums) {
+        if (nums.length == 0) return 0;
+        Arrays.sort(nums);
+        int max = 1;
+        int cur = 1;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i + 1] == nums[i]) {
+                continue;
+            } else if (nums[i + 1] == nums[i] + 1) {
+                cur++;
+            } else {
+                max = Math.max(max, cur);
+                cur = 1;
+            }
+        }
+        return Math.max(max, cur);
     }
 
     // Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
