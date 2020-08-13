@@ -53,12 +53,12 @@ public class MyStack {
 	    }
 	}
 	
-	// *****************************************************************************************
-	// Implement Stack using Queues
+	// LC-225. Implement Stack using Queues
 	class QStack {
 	    Queue<Integer> q = new LinkedList<>();
 	    Queue<Integer> tmp = new LinkedList<>();
-	    public void push(int x) {
+	    // Time O(n)
+	    public void push_2Q(int x) {
 	        while (!q.isEmpty()) {
 	            tmp.add(q.remove());
 	        }
@@ -67,17 +67,26 @@ public class MyStack {
 	            q.add(tmp.remove());
 	        }
 	    }
+	    
+	    // Time O(n)
+	    public void push_1Q(int x) {
+	        q.add(x);
+	        for (int i = q.size(); i > 1; i-- ) {
+	            q.add(q.remove());
+	        }
+	    }
 
+	    // Time O(1)
 	    public void pop() {
 	        q.remove();
 	    }
 
-	    // Get the top element.
+	    // Time O(1)
 	    public int top() {
-	        return q.element();   
+	        return q.peek();   
 	    }
 
-	    // Return whether the stack is empty.
+	    // Time O(1)
 	    public boolean empty() {
 			return q.isEmpty();
 	    }
