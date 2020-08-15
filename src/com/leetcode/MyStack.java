@@ -3,27 +3,54 @@ package com.leetcode;
 import java.util.*;
 
 public class MyStack {
-	// Valid Parentheses
+	// LC-20. Valid Parentheses
+	// Time O(n), Space O(n)
 	public static boolean isValid(String s){
 		Stack<Character> bracket = new Stack<>();
-		
         for (int i = 0; i < s.length(); i++){
             char c = s.charAt(i);     
             if (c == '(' || c == '{' || c == '['){
-                bracket.push(c); // push left brackets
-            }else if (bracket.empty()){
-                return false;
-            }else{
-                char d = bracket.pop().charValue();
-                if (c == ')' && d != '('||
-                    c == '}' && d != '{' ||
-                    c == ']' && d != '['){
-                     return false;
+                bracket.push(c); 
+            }else {
+                if (bracket.empty()){
+                    return false;
+                }else{
+                    char top = bracket.pop();
+                    if (c == ')' && top != '('||
+                        c == '}' && top != '{' ||
+                        c == ']' && top != '['){
+                         return false;
+                    }
                 }
             }
         }
 		return bracket.empty();
 	}
+	
+	// Time O(n), Space O(n) 
+    public boolean isValid2(String s) {
+        Stack<Character> stack = new Stack<>();
+        HashMap<Character, Character> map = new HashMap<>();
+        map.put('{', '}');
+        map.put('[', ']');
+        map.put('(', ')');
+        
+        for (int i = 0; i < s.length(); i++) {
+            if (map.containsKey(s.charAt(i))) {
+                stack.push(s.charAt(i));
+            } else {
+                if (stack.empty() ) {
+                    return false;
+                } else {
+                    char top = stack.pop();
+                    if (map.get(top) != s.charAt(i)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return stack.empty();
+    }
 	
 	// *****************************************************************************************
 	// LC-155. Min Stack
