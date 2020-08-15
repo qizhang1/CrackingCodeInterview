@@ -26,13 +26,16 @@ public class MyStack {
 	}
 	
 	// *****************************************************************************************
-	class MinStack {
+	// LC-155. Min Stack
+	// supports push, pop, top, and retrieving the minimum element in constant time
+	// Time O(1), Space O(n) 
+	class MinStack1 {
 	    Stack<Integer> stack = new Stack<>();
 	    Stack<Integer> minStack = new Stack<>();
 	    
 	    public void push(int x) {
 	        stack.push(x);
-	        if (minStack.empty() || x <= minStack.peek()) {
+	        if (minStack.empty() || x <= minStack.peek()) { 
 	            minStack.push(x);
 	        } 
 	    }
@@ -52,7 +55,35 @@ public class MyStack {
 	        return minStack.peek();
 	    }
 	}
-	
+
+	class MinStack2 {
+	    Stack<Integer> stack = new Stack<>();
+	    Stack<Integer> minStack = new Stack<>(); // push current min, keep same size as stack
+	    
+	    public void push(int x) {
+	        stack.push(x);
+	        if (minStack.empty() || x < getMin()) {
+	            minStack.push(x);
+	        } else {
+	            minStack.push(getMin());
+	        }
+	    }
+
+	    public void pop() {
+	        stack.pop();
+	        minStack.pop();
+
+	    }
+
+	    public int top() {
+	        return stack.peek();
+	    }
+
+	    public int getMin() {
+	        return minStack.peek();
+	    }
+	}
+
 	// LC-225. Implement Stack using Queues
 	class QStack {
 	    Queue<Integer> q = new LinkedList<>();
