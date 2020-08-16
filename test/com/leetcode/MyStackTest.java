@@ -33,4 +33,16 @@ public class MyStackTest {
 		int[] expect = {8,1,5,4,3,2,1,1,0,0};
 		assertTrue(Arrays.equals(MyStack.dailyTemperatures1(T), expect));
 	}
+	
+	@Test
+	public void testNextGreaterElement11() {
+		int[] nums1 = {4,1,2}, nums2 = {1,3,4,2};
+		assertTrue(Arrays.equals(MyStack.nextGreaterElement1(nums1, nums2), new int[] {-1,3,-1}));
+	}
+	
+	@Test
+	public void testNextGreaterElement12() {
+		int[] nums1 = {4,1,2}, nums2 = {1,2,3,4};
+		assertTrue(Arrays.equals(MyStack.nextGreaterElement1(nums1, nums2), new int[] {-1, 2, 3}));
+	}
 }

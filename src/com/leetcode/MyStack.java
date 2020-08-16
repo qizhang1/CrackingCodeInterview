@@ -166,4 +166,29 @@ public class MyStack {
         }
         return ans;
     }
+	
+	// LC-496. Next Greater Element I
+	// The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2. 
+	// If it does not exist, output -1 for this number.
+	// Assume no duplicates, nums1’s elements are subset of nums2
+	// Time O(n), Space O(m) * optimal,  m is the size of nums1*
+    public static int[] nextGreaterElement1(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> map = new HashMap<>(); // <num, index> lookup
+        for (int i = 0; i < nums1.length; i++) {
+            map.put(nums1[i], i);
+        }
+        Stack<Integer> stack = new Stack<>(); // nums1 element that we haven't found next grater number yet
+        int[] ans = new int[nums1.length];
+        Arrays.fill(ans, -1);
+        
+        for (int i = 0; i < nums2.length; i++) {
+            while (!stack.empty() && nums2[i] > nums1[stack.peek()]) {
+                ans[stack.pop()] = nums2[i];
+            }
+            if (map.containsKey(nums2[i])) {
+                stack.push(map.get(nums2[i]));
+            }
+        }
+        return ans;
+    }
 }
