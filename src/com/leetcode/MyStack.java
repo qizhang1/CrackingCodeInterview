@@ -149,4 +149,21 @@ public class MyStack {
 			return q.isEmpty();
 	    }
 	}
+	
+	// LC-739. Daily Temperatures
+	// return how many days you would have to wait until a warmer temperature. T in range [30-100]
+    // Time O(N) / O(NW), O(N+W), W is the size of the next array.
+	public static int[] dailyTemperatures1(int[] T) {
+        
+        int[] ans = new int[T.length];
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < T.length; i++) {
+        	while (!stack.empty() && T[i] > T[stack.peek()]) {
+        		int index = stack.pop();
+        		ans[index] = i - index;
+        	}
+        	stack.push(i);
+        }
+        return ans;
+    }
 }
