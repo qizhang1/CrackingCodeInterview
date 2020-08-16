@@ -45,4 +45,10 @@ public class MyStackTest {
 		int[] nums1 = {4,1,2}, nums2 = {1,2,3,4};
 		assertTrue(Arrays.equals(MyStack.nextGreaterElement1(nums1, nums2), new int[] {-1, 2, 3}));
 	}
+	
+	@Test
+	public void testNextGreaterElement2() {
+		int[] nums = {1,2,1};
+		assertTrue(Arrays.equals(MyStack.nextGreaterElement2(nums), new int[] {2, -1, 2}));
+	}
 }

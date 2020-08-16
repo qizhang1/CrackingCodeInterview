@@ -191,4 +191,25 @@ public class MyStack {
         }
         return ans;
     }
+    
+    // LC-503. Next Greater Element II
+    // return the Next Greater Number for every element in a circular array 
+    // you could search circularly to find its next greater number.
+    // Time O(n), Space O(n)
+    public static int[] nextGreaterElement2(int[] nums) {
+        Stack<Integer> stack = new Stack<>();  // index stack
+        int[] ans = new int[nums.length];
+        Arrays.fill(ans, -1);
+        
+        for (int i = 0; i < 2 * nums.length; i++) {
+            int n = nums[i % nums.length];
+            while (!stack.empty() && n > nums[stack.peek()]) {
+                ans[stack.pop()] = n;
+            }
+            if (i < nums.length) {
+                stack.push(i);
+            }
+        }
+        return ans;
+    }
 }
