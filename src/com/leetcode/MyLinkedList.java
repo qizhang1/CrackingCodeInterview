@@ -435,13 +435,11 @@ public class MyLinkedList {
 		return dummyHead.next;
 	}
 
-	// *****************************************************************************************
-	// Reverse a linked list.
+	// LC-206. Reverse Linked List
 	// Time O(n) Space O(1)
 	public static ListNode reverse(ListNode head) {
 		 ListNode cur = head;
 	     ListNode newHead = null;
-
 	     while (cur != null){
 	    	 ListNode toPrepend = cur;
 	         cur = cur.next;
@@ -666,4 +664,45 @@ public class MyLinkedList {
 		}
 		return newHead;		
 	}
+	
+	// LC-160. Intersection of Two Linked Lists
+	// Time O(m+n), Space O(1)
+    public static int getLen(ListNode head) {
+        int len = 0;
+        while (head!= null) {
+            head = head.next;
+            len++;
+        }
+        return len;
+    }
+    
+    public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int lenA = getLen(headA);
+        int lenB = getLen(headB);
+        
+        // skip first few in the longer list
+        ListNode a = headA;
+        ListNode b = headB;
+        if (lenA > lenB) {
+        	for (int i = 1; i <= lenA - lenB; i++) {
+        		a = a.next;
+        	}
+        } else {
+        	for (int i = 1; i <= lenB - lenA; i++) {
+        		b = b.next;
+        	}
+        }
+        // scan together
+        while (a != null) {
+            if (a == b) {
+                return a;
+            }
+            a = a.next;
+            b = b.next;
+        }
+        return null;
+    }
+    
+    
+	
 }
