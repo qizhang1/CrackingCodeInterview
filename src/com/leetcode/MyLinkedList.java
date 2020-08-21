@@ -297,25 +297,23 @@ public class MyLinkedList {
 		return dummyHead.next;
 	}
 
-	// *****************************************************************************************
-	// Merge two sorted linked lists and return it as a new list.
-	// The new list should be made by splicing together the nodes of the first
-	// two lists.
+	// LC-21. Merge Two Sorted Lists
+	// Time O(n+m), Space O(1)
 	public static ListNode mergeTwoLists1(ListNode l1, ListNode l2) {
-		ListNode dummyHead = new ListNode(0);
-		ListNode cur;
-		for (cur = dummyHead; l1 != null && l2 != null; cur = cur.next) {
-			if (l1.val <= l2.val) {
-				cur.next = l1;
-				l1 = l1.next;
-			} else {
-				cur.next = l2;
-				l2 = l2.next;
-			}
-		}
-		// the rest part
-		cur.next = (l1 == null) ? l2 : l1;
-		return dummyHead.next;
+        ListNode dummyHead = new ListNode(0);
+        ListNode cur = dummyHead;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                cur.next = l1;
+                l1 = l1.next;
+            } else {
+                cur.next = l2;
+                l2 = l2.next;
+            }
+            cur = cur.next;
+        }
+        cur.next = l1 == null? l2: l1;
+        return dummyHead.next;
 	}
 
 	public static ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
