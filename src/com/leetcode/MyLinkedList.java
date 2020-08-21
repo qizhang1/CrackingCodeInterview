@@ -67,9 +67,8 @@ public class MyLinkedList {
 		System.out.println();
 	}
 
-	// *****************************************************************************************
-	// Given a sorted linked list, delete all duplicates
-	// each element appear only once
+	// LC-83. Remove Duplicates from Sorted List
+	// Time O(n), Space O(1)
 	public static ListNode deleteDuplicates(ListNode head) {
         ListNode cur = head;
         while (cur != null && cur.next != null){
