@@ -415,22 +415,16 @@ public class MyLinkedList {
 		return lists.get(0);
 	}
 
-	// *****************************************************************************************
+	// LC-24. Swap Nodes in Pairs 
 	// Swap every two adjacent nodes and return its head.
-	// O(n)
+	// Time O(n), Space O(1)
 	public static ListNode swapPairs(ListNode head) {
-		// if (head == null || head.next == null){
-		// return head;
-		// }
-		if (head == null)
-			return null;
-
 		ListNode dummyHead = new ListNode(0);
 		dummyHead.next = head;
 
 		ListNode pre = dummyHead;
 		ListNode cur = head;
-		ListNode next = head.next;
+		ListNode next = cur != null ? cur.next : null;
 
 		while (next != null) {
 			pre.next = next;
