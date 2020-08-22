@@ -270,14 +270,11 @@ public class MyLinkedList {
         return dummyHead.next;
     }
 
-	// *****************************************************************************************
-	// Given a linked list, remove the nth node from the end of list and
-	// return its head in one pass.
-	// Given n will always be valid.
+	// LC-19. Remove Nth Node From End of List
+	// Time O(n), Space O(1) * One pass *
 	public static ListNode removeNthFromEnd(ListNode head, int n) {
 		ListNode dummyHead = new ListNode(0);
 		dummyHead.next = head;
-
 		ListNode pre = dummyHead;
 		ListNode cur = head;
 
@@ -285,7 +282,6 @@ public class MyLinkedList {
 		for (int i = 0; i < n; i++) {
 			cur = cur.next;
 		}
-
 		// advance together
 		while (cur != null) {
 			pre = pre.next;
@@ -295,6 +291,22 @@ public class MyLinkedList {
 		pre.next = pre.next.next;
 		return dummyHead.next;
 	}
+	
+	// Time O(n), Space O(1) * Two pass *
+    public static ListNode removeNthFromEnd2(ListNode head, int n) {
+        int len = getLen(head);
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next= head;
+        ListNode cur = dummyHead;
+        for (int i = 0; i < len - n; i++) {
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+        return dummyHead.next;
+    }
+	
+	
+	
 
 	// LC-21. Merge Two Sorted Lists
 	// Time O(n+m), Space O(1)
