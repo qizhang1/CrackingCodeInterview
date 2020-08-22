@@ -125,14 +125,8 @@ public class MyLinkedList {
 		return dummyHead.next;
 	}
 
-	// *****************************************************************************************
-	// no need special case for head == null
-	public static ListNode prepend(ListNode head, int toPrepend) {
-		ListNode newNode = new ListNode(toPrepend);
-		newNode.next = head;
-		head = newNode;
-		return head;
-	}
+
+	
 
 	// *****************************************************************************************
 	public static ListNode append(ListNode head, int toAppend) {
@@ -557,6 +551,45 @@ public class MyLinkedList {
 		}
 		return dummyHead.next;
 	}
+	
+	// LC-445. Add Two Numbers II
+	// Ex. (7 ->2 -> 4 -> 3) + (5 -> 6 -> 4) = 7 -> 8 -> 0 -> 7  7243 + 564 = 7807
+	// Time O(max(m,n)), Space O(max(m,n) + 1)
+    public static ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        Stack<Integer> stack1 = buildStack(l1); 
+        Stack<Integer> stack2 = buildStack(l2);
+        ListNode head = null;
+        
+        int carryover = 0;
+        while (!stack1.empty() || !stack2.empty()) {
+            int n1 = stack1.empty()? 0 : stack1.pop();
+            int n2 = stack2.empty()? 0 : stack2.pop();
+            
+            int sum = n1 + n2 + carryover;
+            carryover = sum / 10;
+            head = prepend(head, sum % 10);
+        }
+        if (carryover != 0) {
+             head = prepend(head, carryover);
+        }
+        return head; 
+    }
+	// no need special case for head == null
+	public static ListNode prepend(ListNode head, int toPrepend) {
+		ListNode newNode = new ListNode(toPrepend);
+		newNode.next = head;
+		head = newNode;
+		return head;
+	}
+	
+    private static Stack<Integer> buildStack(ListNode l) {
+	    Stack<Integer> stack = new Stack<>();
+	    while (l != null) {
+	        stack.push(l.val);
+	        l = l.next;
+	    }
+	    return stack;
+    }
 
 	// Given a singly linked list L: L0��L1������Ln-1��Ln,
 	// reorder it to: L0��Ln��L1��Ln-1��L2��Ln-2����

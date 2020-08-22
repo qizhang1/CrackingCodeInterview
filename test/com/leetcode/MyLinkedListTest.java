@@ -241,6 +241,15 @@ public class MyLinkedListTest extends TestCase {
 		assertTrue(MyLinkedList.isLinkedListEqual(result, MyLinkedList.addTwoNumbers(head1, head2)));
 	}
 	
+	public void testAddTwoNumbers(){
+		ListNode head1 = MyLinkedList.createLinkedListFromArray1(new int[]{7, 2, 4, 3});
+		ListNode head2 = MyLinkedList.createLinkedListFromArray1(new int[]{5, 6, 4});
+		ListNode result = MyLinkedList.createLinkedListFromArray1(new int[]{7, 8, 0, 7});
+		assertTrue(MyLinkedList.isLinkedListEqual(result, MyLinkedList.addTwoNumbers2(head1, head2)));
+	}
+	
+	
+	
 	public void testReorderList() {
 		ListNode head1 = MyLinkedList.createLinkedListFromArray1(new int[]{1, 2, 3, 4});
 		ListNode result = MyLinkedList.createLinkedListFromArray1(new int[]{1, 4, 2, 3});
