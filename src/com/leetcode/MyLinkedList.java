@@ -537,8 +537,9 @@ public class MyLinkedList {
 		return false;
 	}
 
-	// Add the two numbers and return it as a linked list.
+	// LC-2. Add Two Numbers
 	// Ex. (2 -> 4 -> 3) + (5 -> 6 -> 4) = 7 -> 0 -> 8  342 + 465 = 807
+	// Time O(max(m,n)), Space O(max(m,n) + 1)
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		ListNode dummyHead = new ListNode(0);
 		ListNode cur = dummyHead;
@@ -549,10 +550,12 @@ public class MyLinkedList {
 			int sum = n1 + n2 + carryover;
 			cur.next = new ListNode(sum % 10);
 			carryover = sum / 10;
-			if (l1 != null)
+			if (l1 != null) {
 				l1 = l1.next;
-			if (l2 != null)
+			}
+			if (l2 != null) {
 				l2 = l2.next;
+			}
 			cur = cur.next;
 		}
 		if (carryover != 0) {
