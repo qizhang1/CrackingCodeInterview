@@ -248,14 +248,21 @@ public class MyLinkedListTest extends TestCase {
 		assertTrue(MyLinkedList.isLinkedListEqual(result, MyLinkedList.addTwoNumbers2(head1, head2)));
 	}
 	
-	
-	
 	public void testReorderList() {
 		ListNode head1 = MyLinkedList.createLinkedListFromArray1(new int[]{1, 2, 3, 4});
 		ListNode result = MyLinkedList.createLinkedListFromArray1(new int[]{1, 4, 2, 3});
 		MyLinkedList.reorderList(head1);
 		MyLinkedList.printLinkedList(head1);
 		assertTrue(MyLinkedList.isLinkedListEqual(result, head1));
+	}
+	
+	public void testIsPalindrome() {
+		assertTrue(MyLinkedList.isPalindrome(MyLinkedList.createLinkedListFromArray1(new int[]{1})));
+		assertTrue(MyLinkedList.isPalindrome(null));
+		assertTrue(MyLinkedList.isPalindrome(MyLinkedList.createLinkedListFromArray1(new int[]{1, 0, 1})));
+		assertTrue(MyLinkedList.isPalindrome(MyLinkedList.createLinkedListFromArray1(new int[]{1, 2, 2, 1})));
+		assertFalse(MyLinkedList.isPalindrome(MyLinkedList.createLinkedListFromArray1(new int[]{1, 2, 3, 1})));
+
 	}
 	
 }

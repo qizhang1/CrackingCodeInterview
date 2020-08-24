@@ -742,6 +742,33 @@ public class MyLinkedList {
         return null;
     }
     
-    
-	
+    // LC-234. Palindrome Linked List
+    // Time O(n), Space O(1) * reverse, break the input linkedlist *
+    public static boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+        	return true;
+        }
+		ListNode preSlow = null;
+		ListNode slow = head;
+		ListNode fast = head;
+		while (fast != null && fast.next != null) {
+			preSlow = slow;
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		preSlow.next = null; // cut at the middle
+		ListNode right = reverse(slow);
+		
+		// compare two linkedlists
+		// for list with odd length, the middle node is the tail of the right list after reverse
+		ListNode left = head;
+        while (left != null && right != null){
+            if (left.val != right.val){
+                return false;
+            }
+            left = left.next;
+            right = right.next;
+        }
+        return true;
+    }
 }
