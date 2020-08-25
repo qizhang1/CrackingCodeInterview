@@ -771,4 +771,47 @@ public class MyLinkedList {
         }
         return true;
     }
+    
+    // LC-725. Split Linked List in Parts
+    // Time O(N+k), Space O(max(N,k)) * create new Lists *
+    // If k is large, it could still require creating many new empty lists.
+    public static ListNode[] splitListToParts1(ListNode root, int k) {
+        int len = getLen (root);
+
+        ListNode[] parts = new ListNode[k];
+        ListNode cur = root;
+        for (int i = 0; i < k; i++) {
+            ListNode dummyHead = new ListNode(0);
+            ListNode pre = dummyHead;
+            // every part has N/k elements, except the first N%k parts have an extra one
+            int partLen = len / k + (i < len % k ? 1 : 0);
+            for (int j = 0; j < partLen; j++) {
+                pre.next = new ListNode(cur.val);
+                pre = pre.next;
+                cur = cur.next;
+            }
+            parts[i] = dummyHead.next;
+        }
+        return parts;
+    }
+    
+    // Time O(N+k), Space O(k) * split input List *
+    public ListNode[] splitListToParts2(ListNode root, int k) {
+        int len = getLen (root);
+        ListNode[] parts = new ListNode[k];
+        ListNode cur = root;
+        for (int i = 0; i < k; i++) {
+            parts[i] = cur;    
+            int partLen = len / k + (i < len % k ? 1 : 0);
+            ListNode pre = null;
+            for (int n = 0; n < partLen; n++) {
+                pre = cur;
+                cur = cur.next;
+            }
+            if ( pre != null) { 
+                pre.next = null; // cut
+            }
+        }
+        return parts;
+    }
 }
