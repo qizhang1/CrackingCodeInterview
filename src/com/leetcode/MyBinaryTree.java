@@ -602,7 +602,7 @@ public class MyBinaryTree {
 		return 1 + getSize(root.left) + getSize(root.right);
 	}
 
-	// LC-104. Maximum Depth of Binary Tree, depth of root is 1
+	// LC-104. Maximum Depth of Binary Tree, define depth of node is 1
 	// Time O(n), Space O(1)
 	public static int getMaxDepth(TreeNode root) {
 		if (root == null) {
@@ -611,10 +611,10 @@ public class MyBinaryTree {
 		return Math.max(getMaxDepth(root.left), getMaxDepth(root.right)) + 1;
 	}
 
-	// *****************************************************************************************
+	// LC-110. Balanced Binary Tree
 	// A height-balanced binary tree is defined as a binary tree in which
-	// the depth of the two subtrees of every node never differ by more than 1.
-	// Brute force top-down recursion O(n^2)
+	// the depth of the two subtrees of EVERY node never differ by more than 1.
+	// Time O(n^2), Space O(1) * Top-down recursion *
 	public static boolean isBalanced1(TreeNode root) {
 		if (root == null) {
 			return true;
@@ -625,19 +625,19 @@ public class MyBinaryTree {
 				&& isBalanced1(root.right);
 	}
 
-	// Optimal O(n)
+	// Time O(n), Space O(1) * DFS bottom up, optimal *
 	public static boolean isBalanced2(TreeNode root) {
-		return isBalanced2Helper(root) != -1;
+		return getBalancedMaxDepth(root) != -1;
 	}
 
-	// return �C1 if tree is unbalanced, otherwise return the max depth of the
-	// current node
-	private static int isBalanced2Helper(TreeNode root) {
+	// return the max depth of the current node
+	// return -1 if tree is unbalanced
+	private static int getBalancedMaxDepth(TreeNode root) {
 		if (root == null) {
 			return 0;
 		}
-		int lDepth = isBalanced2Helper(root.left);
-		int rDepth = isBalanced2Helper(root.right);
+		int lDepth = getBalancedMaxDepth(root.left);
+		int rDepth = getBalancedMaxDepth(root.right);
 		if (lDepth == -1 || rDepth == -1 || Math.abs(lDepth - rDepth) > 1) {
 			return -1;
 		}
