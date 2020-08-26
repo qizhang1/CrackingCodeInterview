@@ -602,15 +602,13 @@ public class MyBinaryTree {
 		return 1 + getSize(root.left) + getSize(root.right);
 	}
 
-	// *****************************************************************************************
-	// Definition: depth of root is 1 ?
+	// LC-104. Maximum Depth of Binary Tree, depth of root is 1
+	// Time O(n), Space O(1)
 	public static int getMaxDepth(TreeNode root) {
 		if (root == null) {
 			return 0;
 		}
-		int lDepth = getMaxDepth(root.left);
-		int rDepth = getMaxDepth(root.right);
-		return Math.max(lDepth, rDepth) + 1;
+		return Math.max(getMaxDepth(root.left), getMaxDepth(root.right)) + 1;
 	}
 
 	// *****************************************************************************************
