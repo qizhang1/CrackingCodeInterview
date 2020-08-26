@@ -262,7 +262,12 @@ public class MyLinkedListTest extends TestCase {
 		assertTrue(MyLinkedList.isPalindrome(MyLinkedList.createLinkedListFromArray1(new int[]{1, 0, 1})));
 		assertTrue(MyLinkedList.isPalindrome(MyLinkedList.createLinkedListFromArray1(new int[]{1, 2, 2, 1})));
 		assertFalse(MyLinkedList.isPalindrome(MyLinkedList.createLinkedListFromArray1(new int[]{1, 2, 3, 1})));
-
+	}
+	
+	public void testOddEvenList() {
+		ListNode head1 = MyLinkedList.createLinkedListFromArray1(new int[]{1, 2, 3, 4, 5});
+		ListNode result = MyLinkedList.createLinkedListFromArray1(new int[]{1, 3, 5, 2, 4});
+		assertTrue(MyLinkedList.isLinkedListEqual(result, MyLinkedList.oddEvenList(head1)));
 	}
 	
 }

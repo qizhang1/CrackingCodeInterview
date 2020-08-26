@@ -814,4 +814,23 @@ public class MyLinkedList {
         }
         return parts;
     }
+    
+    // LC-328. Odd Even Linked List
+    // Time O(n), Space O(1)
+    public static ListNode oddEvenList(ListNode head) {
+        if (head == null) {
+        	return null;
+        }
+        ListNode odd = head;
+        ListNode even = head.next; 
+        ListNode evenHead = even; 
+        while (even != null && even.next != null) { 
+            odd.next = odd.next.next;
+            odd = odd.next;
+            even.next = even.next.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
+    }
 }
