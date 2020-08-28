@@ -32,7 +32,7 @@ public class MyBinaryTree {
 	}
 
 	// *****************************************************************************************
-	// Tree deserialization
+	// Tree deserialization - preorder
 	// *****************************************************************************************
 
 	public static TreeNode createBinaryTreeFromStrArray1(String[] s) {
@@ -970,17 +970,29 @@ public class MyBinaryTree {
 	}
 	
 	
-	// *****************************************************************************************
+	// LC-226. Invert Binary Tree
+	// Time O(n), Space O(n) 
 	public static TreeNode invertTree(TreeNode root) {
-        if (root != null){
-            TreeNode temp = root.left;
-            root.left = invertTree(root.right);
-            root.right = invertTree(temp);
+        if (root != null) {
+	        TreeNode left = root.left; // save left treeNode
+	        root.left = invertTree(root.right);
+	        root.right = invertTree(left);
         }
         return root;
     }
 	
 	
+    public static void invertTree2(TreeNode root) {
+        if (root != null) {
+            invertTree(root.left);
+            invertTree(root.right);
+            TreeNode temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+        }
+    }
+	
+	// TODO Iterative
 	
 	
 	
@@ -1255,6 +1267,43 @@ public class MyBinaryTree {
 				+ maxWidthHelper(root.right, level - 1);
 
 	}
-	// *****************************************************************************************
 
+	// LC-543. Diameter of Binary Tree
+	// The length of the longest path between any two nodes in a tree, may or may not pass through the root.
+    // Time O(n), Space O(n) DFS
+    public int diameterOfBinaryTree(TreeNode root) {
+        int[] result = getDepthAndPath(root);
+        return result[1];
+	}
+    
+	public int[] getDepthAndPath(TreeNode node) {
+        if (node == null) {
+            return new int[] { 0, 0 };
+        }
+        int[] left = getDepthAndPath(node.left);
+        int[] right = getDepthAndPath(node.right);
+        int currentPath = Math.max(Math.max(left[1], right[1]),
+            left[0] + right[0]);
+        int currentDepth = Math.max(left[0], right[0]) + 1;
+        return new int[] { currentDepth, currentPath};
+    }
+    
+
+    // problem: use of member variable
+    int max = 0;
+    public int diameterOfBinaryTree2(TreeNode root) {
+        getMaxDepth(root);
+        return max;
+    }
+    
+    public int getMaxDepth2(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+                
+        int L = getMaxDepth(root.left);
+        int R = getMaxDepth(root.right);
+        max = Math.max(max, L + R); // update longest path
+		return Math.max(L, R) + 1;
+	}
 }

@@ -417,6 +417,12 @@ public class MyBinaryTreeTest {
 		assertEquals(null, MyBinaryTree.LCA(root, childOuter1, childOuter2));	
 	}
 	
-
-
+	@Test
+	public void testInvertTree1() {
+		String[] strArray = new String[] { "4", "2", "1", "#", "#", "3", "#", "#", "7", "6", "#", "#", "9", "#", "#"};
+		TreeNode root1 = MyBinaryTree.createBinaryTreeFromStrArray1(strArray);
+		String[] expectStrArray = new String[] { "4", "7", "9", "#", "#", "6", "#", "#", "2", "3", "#", "#", "1", "#", "#"};
+		TreeNode expect = MyBinaryTree.createBinaryTreeFromStrArray1(expectStrArray);
+		assertTrue(MyBinaryTree.isSameTree(MyBinaryTree.invertTree(root1), expect));	
+	}
 }
