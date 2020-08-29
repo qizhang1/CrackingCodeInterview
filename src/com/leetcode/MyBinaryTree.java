@@ -1306,4 +1306,19 @@ public class MyBinaryTree {
         max = Math.max(max, L + R); // update longest path
 		return Math.max(L, R) + 1;
 	}
+    
+    // LC-617. Merge Two Binary Trees
+    // Time O(n), Space O(n)
+    public static TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null) {
+            return null;
+        }
+        int n1 = t1 == null ? 0 : t1.val;
+        int n2 = t2 == null ? 0 : t2.val;
+
+        TreeNode node = new TreeNode(n1 + n2);
+        node.left = mergeTrees(t1 == null ? null : t1.left, t2 == null? null: t2.left);
+        node.right = mergeTrees(t1 == null ? null : t1.right, t2 == null? null : t2.right);
+        return node;
+    }
 }

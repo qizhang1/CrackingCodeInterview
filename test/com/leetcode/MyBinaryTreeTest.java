@@ -425,4 +425,15 @@ public class MyBinaryTreeTest {
 		TreeNode expect = MyBinaryTree.createBinaryTreeFromStrArray1(expectStrArray);
 		assertTrue(MyBinaryTree.isSameTree(MyBinaryTree.invertTree(root1), expect));	
 	}
+	
+	@Test
+	public void testMergeTree() {
+		String[] strArray1 = new String[] { "1", "3", "5", "#", "#", "#", "2", "#", "#"};
+		TreeNode root1 = MyBinaryTree.createBinaryTreeFromStrArray1(strArray1);
+		String[] strArray2 = new String[] { "2", "1", "#", "4", "#", "#", "3", "#", "7", "#", "#"};
+		TreeNode root2 = MyBinaryTree.createBinaryTreeFromStrArray1(strArray2);
+		String[] expectStrArrays = new String[] { "3", "4", "5", "#", "#", "4", "#", "#", "5", "#", "7", "#", "#"};
+		TreeNode expectRoot = MyBinaryTree.createBinaryTreeFromStrArray1(expectStrArrays);
+		assertTrue(MyBinaryTree.isSameTree(MyBinaryTree.mergeTrees(root1, root2), expectRoot));	
+	}
 }
