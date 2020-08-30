@@ -718,35 +718,32 @@ public class MyBinaryTree {
 		return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
 	}
 
-	// *****************************************************************************************
-	// Given a binary tree and a sum, find all root-to-leaf paths where each
-	// path's sum equals the given sum.
+	// LC-113. Path Sum II
+	// Given a binary tree and a sum, find all root-to-leaf path sum
+	// Time O(nlogn), Space O(nlogn) ?
 	public static List<List<Integer>> pathSum(TreeNode root, int sum) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		List<Integer> path = new ArrayList<>();
-		if (root != null) {
-			pathSumHelper(root, sum, path, result);
-		}
+		pathSumHelper(root, sum, path, result);
 		return result;
 	}
 
-	private static void pathSumHelper(TreeNode root, int sum,
+	private static void pathSumHelper(TreeNode node, int sum,
 			List<Integer> path, List<List<Integer>> result) {
-		path.add(root.val);
-		if (root.left == null && root.right == null) {
-			if (root.val == sum) {
-				List<Integer> found = new ArrayList<>(path); // copy!!
+		if (node == null) {
+			return;
+		}
+		path.add(node.val); // add current node
+		if (node.left == null && node.right == null) {
+			if (node.val == sum) {
+				List<Integer> found = new ArrayList<>(path); // COPY! this path to the result
 				result.add(found);
 			}
 		} else {
-			if (root.left != null) {
-				pathSumHelper(root.left, sum - root.val, path, result);
-			}
-			if (root.right != null) {
-				pathSumHelper(root.right, sum - root.val, path, result);
-			}
+			pathSumHelper(node.left, sum - node.val, path, result);
+			pathSumHelper(node.right, sum - node.val, path, result);
 		}
-		path.remove(path.size() - 1); // remove leaf!!
+		path.remove(path.size() - 1); // remove current node
 	}
 
 	// *****************************************************************************************
