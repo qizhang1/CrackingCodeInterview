@@ -746,6 +746,32 @@ public class MyBinaryTree {
 		path.remove(path.size() - 1); // remove current node
 	}
 
+	// LC-437. Path Sum 3
+	// Find the number of paths that sum to a given value
+    // The path does not need to start or end at the root or a leaf, but it must go downwards 
+	// Space O(n), Time O(n^2) in worst case (no branching); O(nlogn) in best case (balanced tree).
+    public int pathSum3(TreeNode root, int sum) {
+        if (root == null) {
+            return 0;
+        }
+        //
+        return pathSumFrom(root, sum) + pathSum3(root.left, sum) + pathSum3(root.right, sum);
+    }
+    
+    // return number of paths from current node go downwards
+    private int pathSumFrom(TreeNode node, int sum) {
+        if (node == null) {
+            return 0;
+        }
+        int result = 0;
+        if (node.val == sum) {
+            result++;
+        }
+        result += pathSumFrom(node.left, sum - node.val) + pathSumFrom(node.right, sum - node.val);
+        return result;
+    }
+	
+	
 	// *****************************************************************************************
 	// Print all root to leaf paths
 	// method 1: user int[] and index
