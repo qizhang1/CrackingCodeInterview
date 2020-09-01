@@ -580,17 +580,25 @@ public class MyBinaryTree {
 			System.out.print(")");
 		}
 	}
-
-	// *****************************************************************************************
-	public static boolean isSameTree(TreeNode p, TreeNode q) {
-		if (p == null && q == null) {
+	
+	// LC-572. Subtree of Another Tree
+	// Given two non-empty binary trees s and t, check whether tree t is a subtree of s
+	// A subtree of s is a tree consists of a node in s and all of this node's descendants.
+	// Time O(m * n), Space O(n)
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        return isSameTree(s, t) || (s.left != null && isSubtree(s.left, t))
+            || (s.right != null && isSubtree(s.right, t));
+    }
+    
+	public static boolean isSameTree(TreeNode n1, TreeNode n2) {
+		if (n1 == null && n2 == null) {
 			return true;
 		}
-		if (p == null || q == null) {
+		if (n1 == null || n2 == null) {
 			return false;
 		}
-		return p.val == q.val && isSameTree(p.left, q.left)
-				&& isSameTree(p.right, q.right);
+		return n1.val == n2.val && isSameTree(n1.left, n2.left)
+				&& isSameTree(n1.right, n2.right);
 	}
 
 	// *****************************************************************************************
