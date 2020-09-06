@@ -652,27 +652,23 @@ public class MyBinaryTree {
 		return 1 + Math.max(lDepth, rDepth);
 	}
 
-	// *****************************************************************************************
+	// LC-111. Minimum depth
+	// The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+	// Time O(n), Space O(n)
 	public static int getMinDepth1(TreeNode root) {
-		if (root == null)
-			return 0;
-		return getMinDepth1Helper(root);
-	}
-
-	private static int getMinDepth1Helper(TreeNode root) {
-		if (root.left == null && root.right == null) {
-			return 1;
-		}
-		int lDepth = Integer.MAX_VALUE;
-		if (root.left != null) {
-			lDepth = getMinDepth1Helper(root.left);
-		}
-
-		int rDepth = Integer.MAX_VALUE;
-		if (root.right != null) {
-			rDepth = getMinDepth1Helper(root.right);
-		}
-		return Math.min(lDepth, rDepth) + 1;
+        if (root == null) {
+        	return 0;
+        }
+        if (root.left == null && root.right == null) {
+        	return 1;
+        }
+        if (root.left == null) {
+            return getMinDepth1(root.right) + 1;
+        }
+        if (root.right == null) {
+            return getMinDepth1(root.left) + 1;
+        }
+        return Math.min(getMinDepth1(root.left), getMinDepth1(root.right)) + 1;
 	}
 
 	// BFS works well for highly unbalanced tree
