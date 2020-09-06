@@ -1158,8 +1158,9 @@ public class MyBinaryTree {
 		return l == null ? r : l;
 	}
 
+	// LC-101. Symmetric Tree
 	// Given a binary tree, check whether it is symmetric around its center
-	// Time O(n)
+	// Time O(n), Space O(n)
 	public static boolean isSymmetric(TreeNode root) {
 		if (root == null)
 			return true;
