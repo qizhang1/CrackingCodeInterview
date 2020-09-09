@@ -1347,4 +1347,17 @@ public class MyBinaryTree {
         node.right = mergeTrees(t1 == null ? null : t1.right, t2 == null? null : t2.right);
         return node;
     }
+    
+    // LC-404. Sum of Left Leaves
+    // Time O(n), Space O(n)
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) return 0;
+        // check isLeaf(root.left)
+        if ( root.left != null) {
+            if (root.left.left == null && root.left.right == null) {
+                return root.left.val + sumOfLeftLeaves(root.right);
+            }
+        }
+        return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
+     }
 }
