@@ -1313,25 +1313,72 @@ public class MyBinaryTree {
         int currentDepth = Math.max(left[0], right[0]) + 1;
         return new int[] { currentDepth, currentPath};
     }
-    
 
     // problem: use of member variable
     int max = 0;
     public int diameterOfBinaryTree2(TreeNode root) {
-        getMaxDepth(root);
+        getMaxDepth2(root);
         return max;
     }
     
-    public int getMaxDepth2(TreeNode root) {
-		if (root == null) {
+    public int getMaxDepth2(TreeNode node) {
+		if (node == null) {
 			return 0;
 		}
                 
-        int L = getMaxDepth(root.left);
-        int R = getMaxDepth(root.right);
+        int L = getMaxDepth2(node.left);
+        int R = getMaxDepth2(node.right);
         max = Math.max(max, L + R); // update longest path
 		return Math.max(L, R) + 1;
 	}
+    
+    // LC-687. Longest Univalue Path
+    // find the length of the longest path where each node in the path has the same value. 
+    // This path may or may not pass through the root.
+    // Time O(n), Space O(n) DFS
+    public int longestUnivaluePath(TreeNode root) {
+        int[] result = dfs(root);
+        return result[0];
+    }
+    
+    public int[] dfs(TreeNode node) {
+        if (node == null) {
+        	return new int[]{0,0};
+        }
+        int[] left = dfs(node.left);
+        int[] right = dfs(node.right);
+        int depthLeft = 0, depthRight = 0;
+        if (node.left != null && node.val == node.left.val) {
+            depthLeft = left[0] + 1;
+        }
+        if (node.right != null && node.val == node.right.val) {
+            depthRight = right[0] + 1;
+        }
+        int longestPath = Math.max(Math.max(left[1], right[1]), depthLeft+depthRight);
+        return new int[]{Math.max(depthLeft, depthRight), longestPath};
+    }
+    
+    // problem: use of member variable
+    private int path = 0;
+    public int longestUnivaluePath2(TreeNode root) {
+        dfs(root);
+        return path;
+    }
+    
+    public int dfs2(TreeNode node) {
+        if (node == null) return 0;
+        int left = dfs2(node.left);
+        int right = dfs2(node.right);
+        int depthLeft = 0, depthRight = 0;
+        if (node.left != null && node.val == node.left.val) {
+            depthLeft = left + 1;
+        }
+        if (node.right != null && node.val == node.right.val) {
+            depthRight = right + 1;
+        }
+        path = Math.max(path, depthLeft+depthRight);
+        return Math.max(depthLeft, depthRight);
+    }
     
     // LC-617. Merge Two Binary Trees
     // Time O(n), Space O(n)
