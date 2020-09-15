@@ -1446,4 +1446,31 @@ public class MyBinaryTree {
         		root.val + left[0] + right[0]
         };
     }
+    
+    // LC-671. Second Minimum Node
+    // Given a non-empty special binary tree consisting of nodes with the non-negative value,
+    // each node in this tree has exactly 0 or 2 children
+    // root.val = min(root.left.val, root.right.val)
+    // return -1 if not exists
+    public int findSecondMinimumValue(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        if (root.left == null && root.right == null) {
+            return -1;
+        }
+        int left = root.left.val;
+        int right = root.right.val;
+        if (root.val == root.left.val) {
+            left = findSecondMinimumValue(root.left);
+        } 
+        if (root.val == root.right.val) {
+            right = findSecondMinimumValue(root.right);
+        } 
+        
+        if (left != -1 && right!= -1) {
+            return Math.min(left, right);
+        }
+        return left != -1 ? left : right;
+    }
 }
