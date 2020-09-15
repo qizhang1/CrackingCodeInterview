@@ -436,4 +436,13 @@ public class MyBinaryTreeTest {
 		TreeNode expectRoot = MyBinaryTree.createBinaryTreeFromStrArray1(expectStrArrays);
 		assertTrue(MyBinaryTree.isSameTree(MyBinaryTree.mergeTrees(root1, root2), expectRoot));	
 	}
+	
+	@Test
+	public void testRob() {
+		String[] strArray1 = new String[] { "3", "4", "1", "#", "#", "3", "#", "#", "5", "#", "1", "#", "#"};
+		TreeNode root1 = MyBinaryTree.createBinaryTreeFromStrArray1(strArray1);
+		MyBinaryTree.printLevelorder1(root1);
+		assertEquals(9, MyBinaryTree.rob(root1));
+		assertEquals(9, MyBinaryTree.rob2(root1));
+	}
 }

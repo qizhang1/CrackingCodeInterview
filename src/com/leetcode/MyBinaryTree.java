@@ -1407,4 +1407,43 @@ public class MyBinaryTree {
         }
         return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
      }
+    
+    // LC-337. House Robber III
+    // overlapping of subproblems, not optimal
+    public static int rob(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left = rob(root.left);
+        int right = rob(root.right);
+        int val = root.val;
+        if (root.left != null) {
+            val += rob(root.left.left) + rob(root.left.right);
+        }
+        if (root.right != null) {
+           val += rob(root.right.left) + rob(root.right.right);
+        }
+        return Math.max(left + right,  val);
+    }
+    
+    // Optimal DP
+    // res[0] - the maximum amount of money that can be robbed if root is not robbed, 
+    // res[1] the maximum amount of money robbed if it is robbed
+    public static int rob2(TreeNode root) {
+        int[] res = robSub(root); 
+        return Math.max(res[0], res[1]);
+    }
+
+    private static int[] robSub(TreeNode root) {
+        if (root == null) {
+        	return new int[] { 0, 0 };
+        }
+        
+        int[] left = robSub(root.left);
+        int[] right = robSub(root.right);
+        return new int[] {
+        		Math.max(left[0], left[1]) + Math.max(right[0], right[1]),
+        		root.val + left[0] + right[0]
+        };
+    }
 }
