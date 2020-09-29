@@ -231,13 +231,14 @@ public class MyBinaryTree {
 	}
 
 	// *****************************************************************************************
-	// Breadth-first traversal
+	// BFS (Breadth First traversal) / Level Order traversal
 	// Time O(n) Space O(n)
 	public static void printLevelorder1(TreeNode root) {
 		System.out.print("Level order: ");
-		if (root == null)
+		if (root == null) {
 			return;
-		Queue<TreeNode> parentQueue = new LinkedList<TreeNode>();
+		}
+		Queue<TreeNode> parentQueue = new LinkedList<>();
 		parentQueue.add(root);
 		while (!parentQueue.isEmpty()) {
 			TreeNode cur = parentQueue.remove();
@@ -1453,9 +1454,6 @@ public class MyBinaryTree {
     // root.val = min(root.left.val, root.right.val)
     // return -1 if not exists
     public int findSecondMinimumValue(TreeNode root) {
-        if (root == null) {
-            return -1;
-        }
         if (root.left == null && root.right == null) {
             return -1;
         }
@@ -1473,4 +1471,55 @@ public class MyBinaryTree {
         }
         return left != -1 ? left : right;
     }
+    
+    // LC-637. Average of Levels
+    // Time O(n), Space O(m) m is the maximum number of nodes at any level 
+    // Two Queues
+    public static List<Double> averageOfLevels1(TreeNode root) {
+        List<Double> result = new ArrayList<>();
+        Queue<TreeNode> currentLevel = new LinkedList<>();
+        currentLevel.add(root);
+        while (!currentLevel.isEmpty()) {
+            Queue <TreeNode> nextLevel = new LinkedList <>();
+            double sum = 0;
+            int count = currentLevel.size();
+            while (!currentLevel.isEmpty()) {
+                TreeNode cur = currentLevel.remove();
+                sum = sum + cur.val;
+                if (cur.left != null) {
+                    nextLevel.add(cur.left);
+                } 
+                if (cur.right != null) {
+                    nextLevel.add(cur.right);
+                }
+            }
+            result.add(sum/count);
+            currentLevel = nextLevel;
+        }
+        return result;
+    }
+    
+    // One Queue
+    public List<Double> averageOfLevels2(TreeNode root) {
+        List<Double> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            double sum = 0;
+            int count = queue.size();
+            for (int i = 0; i < count; i++) {
+                TreeNode cur = queue.remove();
+                sum = sum + cur.val;
+                if (cur.left != null) {
+                    queue.add(cur.left);
+                } 
+                if (cur.right != null) {
+                    queue.add(cur.right);
+                }
+            }
+            result.add(sum/count);
+        }
+        return result;
+    }
+
 }
