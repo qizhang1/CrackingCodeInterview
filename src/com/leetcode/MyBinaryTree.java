@@ -1521,5 +1521,45 @@ public class MyBinaryTree {
         }
         return result;
     }
+    
+    
+    // LC-513. Find Bottom Left Tree Value
+    public int findBottomLeftValue1(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int result = 0;
+        
+        while (!queue.isEmpty()) {
+            Queue<TreeNode> next = new LinkedList<>();
+            result = queue.peek().val; // first one is the leftmost one in each level
+            while (!queue.isEmpty()) {
+                TreeNode cur = queue.remove();
+                if (cur.left!= null) {
+                    next.add(cur.left);
+                }
+                if (cur.right != null) {
+                    next.add(cur.right);
+                }
+            }
+            queue = next;
+        }
+        return result;
+    }
+    
+    // BFS with right node first * Tricky *
+    public int findBottomLeftValue2(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            if (root.right != null) {
+                queue.add(root.right);
+            }
+            if (root.left != null) {
+                queue.add(root.left);
+            }
+        }
+        return root.val;
+    }
 
 }
