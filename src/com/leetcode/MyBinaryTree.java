@@ -87,25 +87,28 @@ public class MyBinaryTree {
 		}
 	}
 
-	// Iterative Preorder Traversal 
-	public static void printPreorder2(TreeNode root) {
-		System.out.print("Preorder: ");
-		if (root == null)
-			return;
-		Stack<TreeNode> parentStack = new Stack<>();
-		parentStack.push(root);
-		while (!parentStack.empty()) {
-			TreeNode node = parentStack.pop();
-			System.out.print(node.val + " "); // print a node��s value when pop
-			if (node.right != null) {
-				parentStack.push(node.right);
-			}
-			if (node.left != null) {
-				parentStack.push(node.left);
-			}
-		}
-		System.out.println();
-	}
+	// LC-144. Binary Tree Iterative Preorder Traversal
+    public static List<Integer> printPreorder2(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);       
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            result.add(cur.val);
+            if (cur.right != null) { // push right then left
+                stack.push(cur.right);
+            }
+            if (cur.left != null) {
+                stack.push(cur.left);
+            }
+        }
+        return result;
+    }
+	
+	
 
 	// Iterative Preorder Traversal 
 	public static void printPreorder3(TreeNode root) {
