@@ -94,7 +94,7 @@ public class MyBinaryTree {
             return result;
         }
         Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);       
+        stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
             result.add(cur.val);
@@ -107,8 +107,6 @@ public class MyBinaryTree {
         }
         return result;
     }
-	
-	
 
 	// Iterative Preorder Traversal 
 	public static void printPreorder3(TreeNode root) {
@@ -232,7 +230,53 @@ public class MyBinaryTree {
 			System.out.print(root.val + " ");
 		}
 	}
-
+	
+	// LC-145. Binary Tree Postorder Traversal
+	// root->right->left, then Collections.reverse the result list
+    public List<Integer> postorderTraversal1(TreeNode root) {
+        
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            result.add(cur.val);
+            if (cur.left != null) {
+            	stack.push(cur.left);
+            }
+            if (cur.right != null) {
+            	stack.push(cur.right);
+            }
+        }
+        Collections.reverse(result);
+        return result;
+    }
+    
+	// LinkedList.addFirst to the result list
+    public List<Integer> postorderTraversal2(TreeNode root) {
+        
+        LinkedList<Integer> result = new LinkedList<>();
+        if (root == null) {
+            return result;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            result.addFirst(cur.val); 
+            if (cur.left != null) { // push left then right
+            	stack.push(cur.left);
+            }
+            if (cur.right != null) {
+            	stack.push(cur.right);
+            }
+        }
+        return result;
+    }
+	
 	// *****************************************************************************************
 	// BFS (Breadth First traversal) / Level Order traversal
 	// Time O(n) Space O(n)
