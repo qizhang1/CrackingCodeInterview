@@ -168,7 +168,7 @@ public class MyBinaryTree {
 			printInorderHelper(root.right);
 		}
 	}
-
+	//LC-94. Binary Tree inorder Traversal
 	public static void printInorder2(TreeNode root) {
 		System.out.print("Inorder: ");
 		if (root == null)
@@ -184,7 +184,6 @@ public class MyBinaryTree {
 		}
 		System.out.println();
 	}
-
 	// push that node and all its lefts to stack.
 	private static void pushLeftNodesToStack(Stack<TreeNode> nodeStack,
 			TreeNode n) {
@@ -194,27 +193,24 @@ public class MyBinaryTree {
 		}
 	}
 
-	// ����һ
-	public static void printInorder3(TreeNode root) {
-		System.out.print("Inorder: ");
-		if (root == null)
-			return;
-
-		Stack<TreeNode> parentStack = new Stack<>();
-		TreeNode cur = root;
-
-		while (!parentStack.empty() || cur != null) {
-			if (cur != null) {
-				parentStack.push(cur);
-				cur = cur.left;
-			} else {
-				cur = parentStack.pop();
-				System.out.print(cur.val + " ");
-				cur = cur.right;
-			}
-		}
-		System.out.println();
-	}
+    public static List<Integer> inorderTraversal(TreeNode root) {
+	    List<Integer> ret = new ArrayList<>();
+	    if (root == null) {
+	        return ret;
+	    }
+	    Stack<TreeNode> stack = new Stack<>();
+	    TreeNode cur = root;
+	    while (cur != null || !stack.isEmpty()) {
+	        while (cur != null) {
+	            stack.push(cur);
+	            cur = cur.left;
+	        }
+	        TreeNode node = stack.pop();
+	        ret.add(node.val);
+	        cur = node.right;
+	    }
+	    return ret;
+    }
 
 	// *****************************************************************************************
 	public static void printPostorder(TreeNode root) {
