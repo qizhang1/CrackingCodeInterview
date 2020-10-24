@@ -38,7 +38,6 @@ public class MyBinaryTreeTest {
 		TreeNode root = MyBinaryTree.createBinaryTreeFromStrArray1(strArray);
 		MyBinaryTree.printInorder(root);
 		MyBinaryTree.printInorder2(root);
-		MyBinaryTree.printInorder3(root);
 	}
 
 	@Test
